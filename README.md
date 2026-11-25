@@ -29,7 +29,11 @@ npm test
 npx netlify dev   # local site with functions
 ```
 
-## Netlify settings
+## Netlify
+
+Live site: https://tee-shop-th.netlify.app (site ID b534f209-fcbd-40e6-9daa-13e9ab361835). Deployed from this repo with the Netlify CLI. It is not linked to GitHub yet, so pushes do not deploy on their own.
+
+### Settings
 
 Environment variables:
 
