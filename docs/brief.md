@@ -36,7 +36,7 @@
 - Open: QR timing copy vs instant email; returns policy to confirm; Thai copy needs a native speaker check
 
 ## To do
-- Pick a base site
+- [done] Base: fresh design, see docs/design.md
 - Answer the copy items
 - Get a bigger Irish Coins scan
 - Build payments step by step

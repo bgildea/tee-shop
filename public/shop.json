@@ -1,0 +1,62 @@
+{
+  "brand": {
+    "name": "Tee Shop",
+    "nameTh": "Tee Shop",
+    "contactEmail": "hello@example.com",
+    "lineId": ""
+  },
+  "currency": "THB",
+  "pricesConfirmed": false,
+  "pricePerTee": 490,
+  "delivery": 60,
+  "freeDeliveryFrom": 2,
+  "orderPrefix": "TD",
+  "sizes": [
+    { "id": "S",   "chest": 46, "length": 69 },
+    { "id": "M",   "chest": 51, "length": 73 },
+    { "id": "L",   "chest": 54, "length": 75 },
+    { "id": "XL",  "chest": 57, "length": 77 },
+    { "id": "2XL", "chest": 60, "length": 79 }
+  ],
+  "sizeNote": "Typical values for a 100% cotton tee, measured flat. To be replaced with the print partner's real blank.",
+  "colours": [
+    { "id": "white", "name": "White", "nameTh": "ขาว", "fabric": "#F5F5F2", "ink": "#1F2A44" },
+    { "id": "navy",  "name": "Navy",  "nameTh": "กรมท่า", "fabric": "#222C45", "ink": "#F3F1EA" },
+    { "id": "black", "name": "Black", "nameTh": "ดำ", "fabric": "#1C1C1E", "ink": "#F3F1EA" }
+  ],
+  "accent": "#F2B517",
+  "designs": [
+    {
+      "id": "left-of-centre",
+      "name": "Left of centre",
+      "nameTh": "เยื้องซ้าย",
+      "blurb": "A ring with the dot pushed off centre. The shop's own mark, small enough to notice on the second look.",
+      "blurbTh": "วงกลมที่จุดเยื้องออกจากกลาง สัญลักษณ์ของร้าน เล็กพอให้คนสังเกตเห็นตอนมองครั้งที่สอง",
+      "widthCm": 4.5
+    },
+    {
+      "id": "bangkok-coordinates",
+      "name": "Bangkok coordinates",
+      "nameTh": "พิกัดกรุงเทพ",
+      "blurb": "13.75° N, 100.50° E. For people who know exactly where they are.",
+      "blurbTh": "13.75° N, 100.50° E สำหรับคนที่รู้ว่าตัวเองอยู่ตรงไหน",
+      "widthCm": 6
+    },
+    {
+      "id": "mango-sticky-rice",
+      "name": "Mango sticky rice",
+      "nameTh": "ข้าวเหนียวมะม่วง",
+      "blurb": "Half a mango and a scoop of rice. The best thing to happen in April.",
+      "blurbTh": "มะม่วงครึ่งลูกกับข้าวเหนียวหนึ่งก้อน สิ่งที่ดีที่สุดของเดือนเมษา",
+      "widthCm": 6
+    },
+    {
+      "id": "fon",
+      "name": "Rain",
+      "nameTh": "ฝน",
+      "blurb": "The Thai word for rain over three lines of it. Wear it from June to October, or whenever.",
+      "blurbTh": "คำว่าฝนกับสายฝนสามเส้น ใส่ได้ตั้งแต่มิถุนาถึงตุลา หรือเมื่อไหร่ก็ได้",
+      "widthCm": 4.5
+    }
+  ]
+}
