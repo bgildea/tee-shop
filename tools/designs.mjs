@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import opentype from "opentype.js";
+import { thaiText } from "./thai.mjs";
 
 const require = createRequire(import.meta.url);
 const font = (pkg, file) => {
@@ -21,12 +22,16 @@ const SCRIPT = font("yellowtail", "yellowtail-latin-400-normal.woff");
 const KANIT = font("kanit", "kanit-thai-600-normal.woff");
 
 /* ---------- helpers ---------- */
+// MINI is on while drawing the small chest-logo version: fine texture and small
+// text are left out and strokes get heavier so everything still prints at 4 cm.
+let MINI = false, SWM = 1;
+const big = (markup) => (MINI ? "" : markup);
 const r2 = (n) => Math.round(n * 100) / 100;
 function rng(seed) {
   let a = seed >>> 0;
   return () => { a = (a + 0x6d2b79f5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 }
-const S = (w = 2, c = "INK") => `fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"`;
+const S = (w = 2, c = "INK") => `fill="none" stroke="${c}" stroke-width="${r2(w * SWM)}" stroke-linecap="round" stroke-linejoin="round"`;
 
 // Text centred on cx, baseline y. fit: squeeze/stretch size so it spans this width.
 function text(str, { f = OSW7, size = 20, cx = 100, y, track = 0, fill = "INK", fit, rotate = 0 }) {
@@ -75,6 +80,7 @@ const yAt = (pts, x) => { const i = pts.findIndex((p) => p[0] >= x); return i <=
 
 // Random dots inside a box, denser where density(x, y) is high (0..1).
 function stipple(x0, y0, x1, y1, n, seed, density = () => 1, rMin = 0.45, rMax = 0.8, fill = "INK") {
+  if (MINI) return "";
   const R = rng(seed);
   let out = "", tries = 0, made = 0;
   while (made < n && tries < n * 12) {
@@ -117,18 +123,18 @@ export const designs = {
     const birds = `<path d="M116 52Q120 48 124 52Q128 48 132 52M132 42Q135 39 138 42Q141 39 144 42" ${S(1.2)}/>`;
     const scene = `
       <g mask="url(#doi-sunmask)">${stripedSun("doi-sun", 100, 84, 30)}</g>
-      ${birds}
+      ${big(birds)}
       <path d="${line(back)}" ${S(1.6)}/>
-      <g clip-path="url(#doi-backarea)"><path d="${hatch}" ${S(0.7)}/></g>
+      ${big(`<g clip-path="url(#doi-backarea)"><path d="${hatch}" ${S(0.7)}/></g>`)}
       <path d="${area(mid, 160)}" fill="INK" mask="url(#doi-midmask)"/>
       ${stipple(20, 96, 180, 160, 1100, 3, (x, y) => { const d = y - yAt(mid, x); return d < 2 ? 0 : Math.max(0, 1 - d / 22); }, 0.35, 0.72)}
-      ${mist}
+      ${big(mist)}
       <path d="${area(front, 160)}" fill="INK"/>
       <path d="${pines}" fill="INK"/>`;
     const title = "DOI INTHANON";
     const tSize = textSize(title, OSW7, 150, 0.06);
     return {
-      w: 200, h: 200, body: `
+      w: 200, h: MINI ? 192 : 200, body: `
       <defs>
         <clipPath id="doi-clip"><path d="${arch}"/></clipPath>
         <clipPath id="doi-backarea"><path d="${area(back, 160)}"/></clipPath>
@@ -138,11 +144,11 @@ export const designs = {
       </defs>
       <g clip-path="url(#doi-clip)">${scene}</g>
       <path d="${arch}" ${S(3)}/>
-      <path d="M33.5 147V86A66.5 66.5 0 0 1 166.5 86V147" ${S(0.9)}/>
-      <rect x="76" y="145" width="48" height="14" rx="7" fill="ACCENT" mask="url(#doi-pill)"/>
-      ${text(title, { f: OSW7, size: tSize, y: 184, track: 0.06 })}
-      ${star(24, 192.4, 2.4, "ACCENT")}${star(176, 192.4, 2.4, "ACCENT")}
-      ${text("CHIANG MAI  ·  THAILAND", { f: OSW5, size: 7.6, y: 195.3, track: 0.24 })}` };
+      ${big(`<path d="M33.5 147V86A66.5 66.5 0 0 1 166.5 86V147" ${S(0.9)}/>
+      <rect x="76" y="145" width="48" height="14" rx="7" fill="ACCENT" mask="url(#doi-pill)"/>`)}
+      ${text(title, { f: OSW7, size: MINI ? tSize * 1.12 : tSize, y: MINI ? 186 : 184, track: 0.06 })}
+      ${big(`${star(24, 192.4, 2.4, "ACCENT")}${star(176, 192.4, 2.4, "ACCENT")}
+      ${text("CHIANG MAI  ·  THAILAND", { f: OSW5, size: 7.6, y: 195.3, track: 0.24 })}`)}` };
   },
 
   // Round badge, karst towers in Phang Nga Bay, ribbon title.
@@ -170,40 +176,42 @@ export const designs = {
     const shade = ks.map((k, i) => {
       let lines = "";
       for (let x = k.cx - k.w * 0.05; x < k.cx + k.w / 2 + 2; x += 1.9) lines += `M${r2(x)} ${k.top - 4}V${k.base}`;
+      if (MINI) return "";
       return `<clipPath id="pn-k${i}"><path d="${k.d}"/></clipPath><g clip-path="url(#pn-k${i})"><path d="${lines}" ${S(0.75)}/>${stipple(k.cx - k.w / 2, k.base - 14, k.cx + k.w / 2, k.base, 60, 40 + i, () => 1, 0.35, 0.6)}</g>`;
     }).join("");
     const R = rng(9);
     let water = "";
-    for (let i = 0, y = 133; y < 182; i++, y += 2.6 + i * 0.55) {
+    for (let i = 0, y = 133; y < 182; i++, y += (MINI ? 6 : 2.6) + i * 0.55) {
       let x = 18 + R() * 10;
       while (x < 182) { const len = 6 + R() * 22; water += `M${r2(x)} ${r2(y)}H${r2(Math.min(x + len, 184))}`; x += len + 3 + R() * 7; }
     }
     const refl = ks.map((k) => `M${r2(k.cx - k.w * 0.3)} 131.5H${r2(k.cx + k.w * 0.25)}M${r2(k.cx - k.w * 0.18)} 134H${r2(k.cx + k.w * 0.12)}`).join("");
     const boat = `<path d="M34 140C42 144 60 145 76 141L80 135C77 138 73 139 70 139H38Z" fill="INK"/><path d="M80 135L82 129M36 139L28 146" ${S(1.2)}/><path d="M82 130C85 132 86 135 84 138" ${S(1.2, "ACCENT")}/>`;
-    const scene = `<g mask="url(#pn-sunmask)">${stripedSun("pn-sun", 132, 70, 20)}</g><path d="M54 52Q58 48 62 52Q66 48 70 52M70 40Q73 37 76 40Q79 37 82 40" ${S(1.2)}/>
+    const scene = `<g mask="url(#pn-sunmask)">${stripedSun("pn-sun", 132, 70, 20)}</g>${big(`<path d="M54 52Q58 48 62 52Q66 48 70 52M70 40Q73 37 76 40Q79 37 82 40" ${S(1.2)}/>`)}
       ${ks.map((k) => `<path d="${k.d}" fill="none" stroke="INK" stroke-width="1.7" stroke-linejoin="round"/>`).join("")}${shade}
-      <path d="M14 129.5H186" ${S(1.6)}/><path d="${refl}${water}" ${S(1)}/>${boat}`;
-    const ribbonText = text("PHANG NGA BAY", { f: OSW7, size: 14, y: 166, track: 0.1, fill: "#000" });
+      <path d="M14 129.5H186" ${S(1.6)}/><path d="${refl}${water}" ${S(MINI ? 1.4 : 1)}/>${boat}`;
+    const ribbonText = text("PHANG NGA BAY", { f: OSW7, size: MINI ? 15.5 : 14, y: MINI ? 166.6 : 166, track: MINI ? 0.06 : 0.1, fill: "#000" });
     return {
-      w: 200, h: 200, body: `
+      w: 200, h: MINI ? 178 : 200, body: `
       <defs><clipPath id="pn-clip"><circle cx="100" cy="96" r="76"/></clipPath>
         ${knock("pn-rib", ribbonText + `<path d="M23.5 150.5V171.5M176.5 150.5V171.5" stroke="#000" stroke-width="1.6"/>`)}
         ${knock("pn-under", `<rect x="0" y="149" width="200" height="24" fill="#000"/>`)}
         ${knock("pn-sunmask", ks.map((k) => `<path d="${k.d}" fill="#000" stroke="#000" stroke-width="3"/>`).join(""))}</defs>
-      <g mask="url(#pn-under)"><circle cx="100" cy="96" r="94" ${S(3)}/><circle cx="100" cy="96" r="88.5" ${S(0.9)}/><circle cx="100" cy="96" r="77" ${S(2.2)}/>
+      <g mask="url(#pn-under)"><circle cx="100" cy="96" r="94" ${S(3)}/>${big(`<circle cx="100" cy="96" r="88.5" ${S(0.9)}/>`)}<circle cx="100" cy="96" r="77" ${S(2.2)}/>
       <g clip-path="url(#pn-clip)">${scene}</g></g>
-      ${arcText("ANDAMAN SEA   ·   THAILAND", { f: OSW6, size: 8.6, r: 80.5, cy: 96, track: 0.22 })}
+      ${big(arcText("ANDAMAN SEA   ·   THAILAND", { f: OSW6, size: 8.6, r: 80.5, cy: 96, track: 0.22 }))}
       <path d="M30 154H6L14 163L6 172H30Z M170 154H194L186 163L194 172H170Z" fill="INK"/>
       <path d="M22 150H178V172H22Z" fill="INK" mask="url(#pn-rib)"/>
-      ${star(100, 184, 3.2, "ACCENT")}${star(88, 184, 1.8)}${star(112, 184, 1.8)}` };
+      ${big(`${star(100, 184, 3.2, "ACCENT")}${star(88, 184, 1.8)}${star(112, 184, 1.8)}`)}` };
   },
 
   // City lockup: Wat Arun style prang over a sunburst, shadowed type.
   "bangkok-1782"() {
     const cx = 100, base = 112;
     let rays = "";
-    for (let i = 0; i < 44; i++) {
-      const a = Math.PI + (i / 43) * Math.PI, r0 = 30, r1 = i % 2 ? 66 : 78;
+    const nRays = MINI ? 22 : 44;
+    for (let i = 0; i < nRays; i++) {
+      const a = Math.PI + (i / (nRays - 1)) * Math.PI, r0 = 30, r1 = i % 2 ? 66 : 78;
       rays += `M${r2(cx + Math.cos(a) * r0)} ${r2(base + Math.sin(a) * r0)}L${r2(cx + Math.cos(a) * r1)} ${r2(base + Math.sin(a) * r1)}`;
     }
     const prang = (x, scale) => {
@@ -221,20 +229,20 @@ export const designs = {
     const main = prang(100, 1), l = prang(52, 0.55), rr = prang(148, 0.55);
     const shop = (x, w, h) => `M${x} ${base}V${base - h}H${x + w}V${base}Z`;
     const skyline = shop(14, 12, 18) + shop(28, 8, 26) + shop(160, 9, 22) + shop(172, 14, 15);
-    const water = `<path d="M10 117H190M24 122H70M80 122H124M134 122H176M40 127H96M106 127H160" ${S(1.2)}/>`;
+    const water = MINI ? `<path d="M10 119H190M40 126H160" ${S(1.6)}/>` : `<path d="M10 117H190M24 122H70M80 122H124M134 122H176M40 127H96M106 127H160" ${S(1.2)}/>`;
     const title = "BANGKOK", tS = textSize(title, OSW7, 172, 0.04);
     return {
-      w: 200, h: 205, body: `
-      <defs>${knock("bk-cut", `<path d="${main.cuts + l.cuts + rr.cuts}" stroke="#000" stroke-width="1.1" fill="none"/>`)}</defs>
+      w: 200, h: MINI ? 174 : 205, body: `
+      <defs>${knock("bk-cut", `<path d="${main.cuts + l.cuts + rr.cuts}" stroke="#000" stroke-width="${MINI ? 1.8 : 1.1}" fill="none"/>`)}</defs>
       <path d="${rays}" ${S(1.5, "ACCENT")}/>
       <g mask="url(#bk-cut)"><path d="${main.body + l.body + rr.body + skyline}" fill="INK"/></g>
       <path d="${main.tri + l.tri + rr.tri}" ${S(1.2)}/>
       <path d="M8 ${base}H192" ${S(1.8)}/>${water}
       ${text(title, { f: OSW7, size: tS, cx: 101.6, y: 169.6, track: 0.04, fill: "ACCENT" })}
       ${text(title, { f: OSW7, size: tS, cx: 100, y: 168, track: 0.04 })}
-      <path d="M14 181H64M136 181H186" ${S(1.1)}/>
+      ${big(`<path d="M14 181H64M136 181H186" ${S(1.1)}/>
       ${text("EST. 1782", { f: OSW6, size: 10, y: 184.6, track: 0.3 })}
-      ${text("กรุงเทพมหานคร", { f: KANIT, size: 11.5, y: 199 })}` };
+      ${thaiText("กรุงเทพมหานคร", { weight: 600, size: 11.5, cx: 100, y: 199 }).markup}`)}` };
   },
 
   // Playful tokay gecko from above, script lettering.
@@ -248,7 +256,7 @@ export const designs = {
     const tail = `<path d="M0 40C2 58 22 64 22 80" ${S(10)}/><path d="M22 80C22 94 4 96 2 86" ${S(6.5)}/><path d="M2 86C1 80 8 78 10 82" ${S(4)}/>`;
     const R = rng(4);
     let spots = "";
-    for (let i = 0; i < 34; i++) { const y = -52 + R() * 88, wmax = y < -32 ? 10 : 13; spots += `<circle cx="${r2((R() - 0.5) * 2 * wmax)}" cy="${r2(y)}" r="${r2(1.1 + R() * 1.4)}"/>`; }
+    for (let i = 0; i < (MINI ? 12 : 34); i++) { const y = -52 + R() * 88, wmax = y < -32 ? 10 : 13; spots += `<circle cx="${r2((R() - 0.5) * 2 * wmax)}" cy="${r2(y)}" r="${r2(MINI ? 2.6 + R() * 1.2 : 1.1 + R() * 1.4)}"/>`; }
     let tspots = "";
     [[6, 54], [16, 66], [20, 78], [14, 90]].forEach(([x, y]) => { tspots += `<circle cx="${x}" cy="${y}" r="1.7"/>`; });
     const gecko = `<g transform="translate(94 78) rotate(-24) scale(0.74)">
@@ -262,11 +270,11 @@ export const designs = {
     const moon = `<path d="M160 26A16 16 0 1 0 176 50A13 13 0 1 1 160 26Z" fill="ACCENT"/>`;
     const stars = star(144, 22, 3) + star(176, 18, 2.2) + star(184, 62, 2.6) + star(30, 30, 2.4) + star(22, 70, 1.8);
     return {
-      w: 200, h: 208, body: `
+      w: 200, h: MINI ? 192 : 208, body: `
       <defs>${knock("tk-eyes", `<path d="M-9 -51.6V-44.4M9 -51.6V-44.4" stroke="#000" stroke-width="1.2"/>`)}</defs>
       ${moon}${stars}${gecko}
       ${text("Night Shift", { f: SCRIPT, size: 44, cx: 101, y: 184, rotate: -6, fill: "ACCENT" })}
-      ${text("TUKKAE CLUB  ·  BANGKOK", { f: OSW6, size: 8.4, y: 204, track: 0.28 })}` };
+      ${big(text("TUKKAE CLUB  ·  BANGKOK", { f: OSW6, size: 8.4, y: 204, track: 0.28 }))}` };
   },
 
   // Sea turtle from above in a badge with a scalloped wave ring.
@@ -276,10 +284,10 @@ export const designs = {
       <path d="M-8 -36C-10 -52 -4 -58 0 -58C4 -58 10 -52 8 -36Z" fill="INK" mask="url(#st-hd)"/>
       <path d="M0 -40C22 -40 34 -20 34 4C34 28 20 44 0 46C-20 44 -34 28 -34 4C-34 -20 -22 -40 0 -40Z" fill="INK" mask="url(#st-sh)"/>
       <path d="M-4 44L0 54L4 44" fill="INK"/>`;
-    const scutes = `<path d="M0 -26L11 -18V-4L0 4L-11 -4V-18Z M0 4L11 12V26L0 34L-11 26V12Z M11 -18L24 -24M-11 -18L-24 -24M11 -4L28 2M-11 -4L-28 2M11 12L28 2M-11 12L-28 2M11 26L22 34M-11 26L-22 34" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/><path d="M0 -40C22 -40 34 -20 34 4C34 28 20 44 0 46C-20 44 -34 28 -34 4C-34 -20 -22 -40 0 -40Z" transform="scale(0.88)" fill="none" stroke="#000" stroke-width="1.3"/>`;
+    const scutes = `<path d="M0 -26L11 -18V-4L0 4L-11 -4V-18Z M0 4L11 12V26L0 34L-11 26V12Z M11 -18L24 -24M-11 -18L-24 -24M11 -4L28 2M-11 -4L-28 2M11 12L28 2M-11 12L-28 2M11 26L22 34M-11 26L-22 34" fill="none" stroke="#000" stroke-width="${MINI ? 2.8 : 1.6}" stroke-linejoin="round"/><path d="M0 -40C22 -40 34 -20 34 4C34 28 20 44 0 46C-20 44 -34 28 -34 4C-34 -20 -22 -40 0 -40Z" transform="scale(0.88)" fill="none" stroke="#000" stroke-width="1.3"/>`;
     const R = rng(12);
     let flipDots = "";
-    for (let i = 0; i < 26; i++) { const side = i % 2 ? 1 : -1; flipDots += `<circle cx="${r2(side * (34 + R() * 30))}" cy="${r2(-30 + R() * 14 + (Math.abs(34 + R() * 30) - 34) * -0.1)}" r="${r2(0.8 + R() * 0.9)}" fill="#000"/>`; }
+    for (let i = 0; i < (MINI ? 0 : 26); i++) { const side = i % 2 ? 1 : -1; flipDots += `<circle cx="${r2(side * (34 + R() * 30))}" cy="${r2(-30 + R() * 14 + (Math.abs(34 + R() * 30) - 34) * -0.1)}" r="${r2(0.8 + R() * 0.9)}" fill="#000"/>`; }
     let scallops = "";
     for (let i = 0; i < 28; i++) { const a0 = (i / 28) * Math.PI * 2, a1 = ((i + 1) / 28) * Math.PI * 2, am = (a0 + a1) / 2, r = 71; scallops += `M${r2(100 + Math.cos(a0) * r)} ${r2(100 + Math.sin(a0) * r)}Q${r2(100 + Math.cos(am) * (r + 5))} ${r2(100 + Math.sin(am) * (r + 5))} ${r2(100 + Math.cos(a1) * r)} ${r2(100 + Math.sin(a1) * r)}`; }
     let rays = "";
@@ -295,11 +303,11 @@ export const designs = {
       <circle cx="100" cy="100" r="97" ${S(3)}/><circle cx="100" cy="100" r="78" ${S(1.2)}/>
       <path d="${scallops}" ${S(1.6)}/>
       <path d="${rays}" ${S(1.6, "ACCENT")}/>
-      ${bubbles}
+      ${big(bubbles)}
       <g transform="translate(100 102) rotate(-18)">${turtle}</g>
-      ${arcText("SIMILAN ISLANDS", { f: OSW7, size: 13.5, r: 82.5, side: "top", track: 0.16 })}
-      ${arcText("PHANG NGA  ·  THAILAND", { f: OSW5, size: 8.8, r: 86, side: "bottom", track: 0.22 })}
-      ${star(16, 100, 3, "ACCENT")}${star(184, 100, 3, "ACCENT")}` };
+      ${arcText("SIMILAN ISLANDS", { f: OSW7, size: MINI ? 14.5 : 13.5, r: MINI ? 82 : 82.5, side: "top", track: 0.16 })}
+      ${big(arcText("PHANG NGA  ·  THAILAND", { f: OSW5, size: 8.8, r: 86, side: "bottom", track: 0.22 }))}
+      ${big(`${star(16, 100, 3, "ACCENT")}${star(184, 100, 3, "ACCENT")}`)}` };
   },
 
   // Type-led rainy season piece: cloud, rain, bolt, shadowed title and script.
@@ -318,8 +326,40 @@ export const designs = {
       ${text(title, { f: OSW7, size: tS, cx: 101.8, y: 165.8, track: 0.05, fill: "ACCENT" })}
       ${text(title, { f: OSW7, size: tS, cx: 100, y: 164, track: 0.05 })}
       ${text("Club", { f: SCRIPT, size: 30, cx: 156, y: 182, rotate: -8, fill: "ACCENT" })}
-      ${text("MAY TO OCTOBER", { f: OSW6, size: 8.6, cx: 62, y: 180, track: 0.26 })}
-      ${text("MEMBERS SINCE FOREVER", { f: OSW5, size: 7, cx: 62, y: 191, track: 0.26 })}` };
+      ${big(`${text("MAY TO OCTOBER", { f: OSW6, size: 8.6, cx: 62, y: 180, track: 0.26 })}
+      ${text("MEMBERS SINCE FOREVER", { f: OSW5, size: 7, cx: 62, y: 191, track: 0.26 })}`)}` };
+  },
+
+  // ฝรั่ง: the word for foreigner, and also for guava.
+  farang() {
+    const cx = 100, cy = 60;
+    const R = rng(31);
+    let seeds = "";
+    const nSeeds = MINI ? 10 : 16;
+    for (let i = 0; i < nSeeds; i++) {
+      const a = (i / nSeeds) * Math.PI * 2 + R() * 0.15, rr = 17 + R() * 2;
+      const x = cx + Math.cos(a) * rr, y = cy + Math.sin(a) * rr, deg = (a * 180) / Math.PI + 90;
+      const s = MINI ? 1.5 : 1;
+      seeds += `<path d="M0 ${-3.6 * s}C${2.2 * s} ${-1.4 * s} ${2.2 * s} ${1.8 * s} 0 ${2.8 * s}C${-2.2 * s} ${1.8 * s} ${-2.2 * s} ${-1.4 * s} 0 ${-3.6 * s}Z" transform="translate(${r2(x)} ${r2(y)}) rotate(${r2(deg)})" fill="INK"/>`;
+    }
+    const guava = `
+      <g mask="url(#fr-hl)"><circle cx="${cx}" cy="${cy}" r="41" fill="INK"/></g>
+      <circle cx="${cx}" cy="${cy}" r="35" fill="ACCENT"/>
+      <circle cx="${cx}" cy="${cy}" r="11" fill="none" stroke="INK" stroke-width="${r2(1.4 * SWM)}"/>
+      ${seeds}
+      <path d="M${cx + 6} ${cy - 40}C${cx + 8} ${cy - 50} ${cx + 12} ${cy - 54} ${cx + 18} ${cy - 56}" ${S(2.4)}/>
+      <g mask="url(#fr-vein)"><path d="M${cx + 16} ${cy - 55}C${cx + 30} ${cy - 72} ${cx + 52} ${cy - 70} ${cx + 62} ${cy - 60}C${cx + 50} ${cy - 46} ${cx + 30} ${cy - 44} ${cx + 16} ${cy - 55}Z" fill="INK"/></g>`;
+    const word = thaiText("ฝรั่ง", { weight: 700, cx: 100, y: 168, fit: MINI ? 150 : 140 });
+    const shadow = thaiText("ฝรั่ง", { weight: 700, cx: 102.4, y: 170.4, fit: MINI ? 150 : 140, fill: "ACCENT" });
+    const def = big(`${text("FARANG  (N.)", { f: OSW7, size: 9, cx: 100, y: 186, track: 0.24 })}${text("1. A FOREIGNER     2. A GUAVA", { f: OSW5, size: 8, cx: 100, y: 198, track: 0.2 })}`);
+    return {
+      w: 200, h: MINI ? 176 : 202, body: `
+      <defs>
+        ${knock("fr-hl", `<path d="M${cx - 30} ${cy - 22}A37 37 0 0 1 ${cx - 6} ${cy - 37}" stroke="#000" stroke-width="${MINI ? 3 : 2}" fill="none" stroke-linecap="round"/>`)}
+        ${knock("fr-vein", `<path d="M${cx + 20} ${cy - 55}C${cx + 34} ${cy - 60} ${cx + 48} ${cy - 61} ${cx + 58} ${cy - 59}" stroke="#000" stroke-width="${MINI ? 2.2 : 1.4}" fill="none" stroke-linecap="round"/>`)}
+      </defs>
+      <g transform="translate(100 54) scale(0.74) translate(-100 -60)">${guava}</g>
+      ${shadow.markup}${word.markup}${def}` };
   },
 
   "soi-dog"() {
@@ -338,8 +378,10 @@ export const designs = {
 };
 
 // Full SVG for one design in one ink pair, sized in cm for print.
-export function svgFor(id, { ink, accent, widthCm }) {
+export function svgFor(id, { ink, accent, widthCm, mini = false }) {
+  MINI = mini; SWM = mini ? 1.7 : 1;
   const art = designs[id]();
+  MINI = false; SWM = 1;
   const hCm = Math.round((art.h / art.w) * widthCm * 100) / 100;
   const body = art.body.replaceAll('"INK"', `"${ink}"`).replaceAll('"ACCENT"', `"${accent}"`);
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${widthCm}cm" height="${hCm}cm" viewBox="0 0 ${art.w} ${art.h}">${body}

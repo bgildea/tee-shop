@@ -24,3 +24,11 @@ test("emails escape customer input", () => {
   assert.ok(!customerEmail(o, "https://x").html.includes("<b>"));
   assert.ok(ownerEmail(o, "https://x").html.includes("/print/phang-nga-bay-white.png"));
 });
+
+test("chest logo lines use the 4 cm files", () => {
+  const o = checkOrder({ ...base, items: JSON.stringify([{ id: "farang", colour: "black", size: "L", qty: 1, print: "chest" }]) });
+  assert.equal(o.lines[0].widthCm, shop.chestLogoCm);
+  const html = ownerEmail(o, "https://x").html;
+  assert.ok(html.includes("/print/farang-black-chest.png"));
+  assert.ok(html.includes("LEFT CHEST logo, 4 cm wide"));
+});

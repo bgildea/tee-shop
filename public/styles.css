@@ -122,6 +122,16 @@ section { scroll-margin-top: 5rem; }
 .place-text h3 { font-size: 1.35rem; }
 .place-text p { color: var(--thread); font-size: .92rem; }
 
+/* Print style switch */
+.versions { display: inline-flex; margin-top: 1rem; border: 1.5px solid var(--ink); border-radius: 999px; padding: 3px; gap: 3px; }
+.versions button { border: 0; background: none; border-radius: 999px; padding: .45rem 1rem; font-weight: 600; font-size: .92rem; }
+.versions button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.print-pick { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.print-pick button { border: 1.5px solid var(--line); background: var(--paper); border-radius: 4px; padding: .6rem .7rem; text-align: left; font-weight: 600; line-height: 1.3; }
+.print-pick button small { display: block; font-weight: 400; color: var(--thread); font-size: .82rem; }
+.print-pick button[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.card-sub { color: var(--thread); font-size: .86rem; }
+
 /* Product grid */
 .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
 .chips button { border: 1.5px solid var(--line); background: var(--paper); border-radius: 999px; padding: .4rem .95rem; font-weight: 600; font-size: .9rem; }

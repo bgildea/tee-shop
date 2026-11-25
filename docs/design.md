@@ -29,6 +29,15 @@ Type: Oswald for headings and artwork lettering, Bai Jamjuree for body text and 
 - Tukkae Night Shift: spotted tokay gecko under a crescent moon, script lettering
 - Similan Turtle: turtle with cut-out shell plates inside a scalloped wave ring
 - Monsoon Club: storm cloud, lightning and rain with shadowed type and script
+- Farang: ฝรั่ง in bold Kanit lettering with a yellow shadow over half a guava, plus a dictionary line (foreigner / guava)
 - Soi Dog: small chest print
+
+## Chest logo version
+
+Every design also comes as a 4 cm left-chest logo (`chestLogoCm` in shop.json). It is not a shrunk copy: `svgFor(..., { mini: true })` drops stipple, hatching and text under about 2 mm, and makes strokes 1.7 times heavier so nothing is thinner than about 0.5 mm when printed. Files carry a `-chest` suffix.
+
+## Thai lettering
+
+`tools/thai.mjs` shapes Thai with HarfBuzz so stacked marks (the ั่ in ฝรั่ง) sit correctly. opentype.js alone overlaps them.
 
 Techniques: procedural ridges, hatching and stipple (seeded, so output is repeatable), SVG masks for knockouts so the shirt shows through, two inks per design (main ink flips between cream and black with the shirt, plus marigold).

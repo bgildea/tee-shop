@@ -9,7 +9,7 @@ const T = {
     skip: "Skip to the tees",
     preview: "Preview shop. Prices are placeholders and orders are not live yet.",
     announce: (n) => [`Free delivery anywhere in Thailand when you buy ${n} or more`, "Every tee is printed to order in Thailand", "Pay in seconds with PromptPay"],
-    navShop: "Shop all", navPlaces: "Shop by place", navSizes: "Sizes", navStory: "Our story", navHelp: "Help", bag: "Bag",
+    navShop: "Shop all", navPlaces: "Shop by place", navChest: "Chest logos", navSizes: "Sizes", navStory: "Our story", navHelp: "Help", bag: "Bag",
     headline: "Drawn from real places in Thailand.",
     lede: "Mountains in the north, limestone in the south, Bangkok in between. Line-art tees on soft 100% cotton, printed when you order.",
     heroShop: "Shop the tees", heroPlaces: "Shop by place",
@@ -19,6 +19,11 @@ const T = {
     f4h: "Sizes S to 3XL", f4p: "with a height and weight guide",
     placesH: "Shop by place", placesP: "Every design starts with somewhere real. Pick a corner of the country.",
     shopH: "The tees", all: "All",
+    verFront: "Big front prints", verChest: (cm) => `${cm} cm chest logos`,
+    printLabel: "Print", pFront: "Big front print", pFrontSub: (cm) => `${cm} cm across the chest`,
+    pChest: "Chest logo", pChestSub: (cm) => `${cm} cm, left side`, cardChest: (cm) => `${cm} cm chest logo`,
+    dLogo: (cm) => `Chest logo, ${cm} cm wide, on the left side. A simplified version of the design made to print cleanly at this size`,
+    lineFront: "front print", lineChest: (cm) => `${cm} cm chest logo`,
     tee: (name) => `${name} T-Shirt`, teeColour: (c) => `, ${c}`,
     best: "Best seller", newB: "New",
     pressTag: "Hot off the press", pressBtn: "See the tee",
@@ -69,7 +74,7 @@ const T = {
     skip: "ข้ามไปที่เสื้อ",
     preview: "ร้านตัวอย่าง ราคายังไม่ใช่ราคาจริง และยังไม่เปิดรับคำสั่งซื้อ",
     announce: (n) => [`ส่งฟรีทั่วประเทศเมื่อซื้อ ${n} ตัวขึ้นไป`, "เสื้อทุกตัวพิมพ์ตามสั่งในประเทศไทย", "จ่ายง่ายด้วยพร้อมเพย์"],
-    navShop: "เสื้อทั้งหมด", navPlaces: "เลือกตามสถานที่", navSizes: "ไซซ์", navStory: "เรื่องของเรา", navHelp: "ช่วยเหลือ", bag: "ตะกร้า",
+    navShop: "เสื้อทั้งหมด", navPlaces: "เลือกตามสถานที่", navChest: "โลโก้อกซ้าย", navSizes: "ไซซ์", navStory: "เรื่องของเรา", navHelp: "ช่วยเหลือ", bag: "ตะกร้า",
     headline: "วาดจากสถานที่จริง\nในเมืองไทย",
     lede: "ภูเขาทางเหนือ หินปูนทางใต้ และกรุงเทพฯ ตรงกลาง เสื้อลายเส้นบนผ้าคอตตอน 100% เนื้อนุ่ม พิมพ์เมื่อคุณสั่ง",
     heroShop: "ดูเสื้อทั้งหมด", heroPlaces: "เลือกตามสถานที่",
@@ -79,6 +84,11 @@ const T = {
     f4h: "ไซซ์ S ถึง 3XL", f4p: "พร้อมตารางเทียบส่วนสูงและน้ำหนัก",
     placesH: "เลือกตามสถานที่", placesP: "ทุกลายเริ่มจากสถานที่จริง เลือกมุมไหนของประเทศก็ได้",
     shopH: "เสื้อทั้งหมด", all: "ทั้งหมด",
+    verFront: "ลายใหญ่ด้านหน้า", verChest: (cm) => `โลโก้อกซ้าย ${cm} ซม.`,
+    printLabel: "แบบลาย", pFront: "ลายใหญ่ด้านหน้า", pFrontSub: (cm) => `กว้าง ${cm} ซม. เต็มอก`,
+    pChest: "โลโก้อกซ้าย", pChestSub: (cm) => `${cm} ซม. ด้านซ้าย`, cardChest: (cm) => `โลโก้อกซ้าย ${cm} ซม.`,
+    dLogo: (cm) => `โลโก้อกซ้าย กว้าง ${cm} ซม. เป็นลายแบบย่อที่ออกแบบให้พิมพ์ได้คมชัดในขนาดนี้`,
+    lineFront: "ลายด้านหน้า", lineChest: (cm) => `โลโก้อกซ้าย ${cm} ซม.`,
     tee: (name) => `เสื้อยืด ${name}`, teeColour: (c) => ` สี${c}`,
     best: "ขายดี", newB: "ใหม่",
     pressTag: "มาใหม่ล่าสุด", pressBtn: "ดูเสื้อตัวนี้",
@@ -128,7 +138,7 @@ const T = {
 };
 
 /* ---------- State ---------- */
-let shop, prints = {}, lang = "en", bag = [], filter = "all";
+let shop, prints = {}, lang = "en", bag = [], filter = "all", version = "front";
 const store = {
   get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
@@ -150,11 +160,12 @@ function totals() {
 }
 
 let uidN = 0;
+const printOf = (d, v) => (v === "chest" ? { widthCm: shop.chestLogoCm, placement: "chest", suffix: "-chest" } : { widthCm: d.widthCm, placement: d.placement, suffix: "" });
 function shirt(d, cId, opts = {}) {
-  const c = colour(cId);
+  const c = colour(cId), pr = printOf(d, opts.version || "front");
   return shirtSVG({
     fabric: c.fabric, uid: `u${++uidN}`, backdrop: opts.backdrop || backdrop(d), view: opts.view || "flat",
-    title: teeName(d, c), print: { svg: prints[`${d.id}-${c.id}`], widthCm: d.widthCm, placement: d.placement },
+    title: teeName(d, c), print: { svg: prints[`${d.id}-${c.id}${pr.suffix}`], widthCm: pr.widthCm, placement: pr.placement },
   });
 }
 const lightColour = (d) => d.colours.find((c) => ["white", "sand"].includes(c)) || d.colours[0];
@@ -203,15 +214,18 @@ const cardColour = {};
 function renderGrid() {
   $("#chips").innerHTML = [{ id: "all" }, ...shop.collections].map((c) =>
     `<button type="button" data-chip="${c.id}" aria-pressed="${filter === c.id}">${c.id === "all" ? t("all") : L(c)}</button>`).join("");
+  $("#versions").innerHTML = [["front", t("verFront")], ["chest", t("verChest", shop.chestLogoCm)]].map(([v, label]) =>
+    `<button type="button" data-version="${v}" aria-pressed="${version === v}">${label}</button>`).join("");
   const list = shop.designs.filter((d) => filter === "all" || d.collections.includes(filter));
   $("#grid").innerHTML = list.map((d) => {
     const cId = cardColour[d.id] || d.colours[0];
     const c = colour(cId);
     const badge = d.badge ? `<span class="badge ${d.badge === "new" ? "new" : ""}">${t(d.badge === "new" ? "newB" : "best")}</span>` : "";
     return `<li class="card">
-      <button type="button" data-open="${d.id}" data-colour="${cId}">
-        <div class="card-img">${badge}<div class="v">${shirt(d, cId)}</div><div class="v v2">${shirt(d, cId, { view: "close" })}</div></div>
+      <button type="button" data-open="${d.id}" data-colour="${cId}" data-ver="${version}">
+        <div class="card-img">${badge}<div class="v">${shirt(d, cId, { version, view: version === "chest" ? "close" : "flat" })}</div><div class="v v2">${shirt(d, cId, { view: version === "chest" ? "flat" : "close", version })}</div></div>
         <p class="card-name">${t("tee", L(d))}<span>${t("teeColour", L(c))}</span></p>
+        ${version === "chest" ? `<p class="card-sub">${t("cardChest", shop.chestLogoCm)}</p>` : ""}
         <p class="card-price">${money(shop.pricePerTee)}</p>
       </button>
       <div class="card-swatches">${d.colours.map((x) => `<button type="button" class="dot" style="background:${colour(x).fabric}" data-card="${d.id}" data-swatch="${x}" aria-pressed="${x === cId}" aria-label="${L(colour(x))}"></button>`).join("")}</div>
@@ -283,9 +297,11 @@ function renderSizeTable() {
 }
 
 // Print above a centimetre ruler, both at one scale.
-function scaleSVG(d) {
+function scaleSVG(d, v = "front") {
+  const pr = printOf(d, v);
+  d = { ...d, widthCm: pr.widthCm };
   const k = d.widthCm > 12 ? 12 : 26;
-  const art = prints[`${d.id}-${lightColour(d)}`];
+  const art = prints[`${d.id}-${lightColour(d)}${pr.suffix}`];
   const vb = art.match(/viewBox="([^"]+)"/)[1].split(" ").map(Number);
   const pw = d.widthCm * k, ph = pw * (vb[3] / vb[2]);
   const len = Math.ceil(d.widthCm) + 2, x0 = 10, top = ph + 14, w = len * k;
@@ -306,18 +322,21 @@ function scaleSVG(d) {
     <g fill="#615C53" font-family="Bai Jamjuree, sans-serif" font-size="11" font-weight="500">${nums}<text x="${x0 + w + 12}" y="${top + 30}">${t("cm")}</text></g></svg>`;
 }
 
-const sel = { id: null, colour: null, size: null, view: "flat" };
-function openSheet(id, cId) {
+const sel = { id: null, colour: null, size: null, view: "flat", version: "front" };
+function openSheet(id, cId, ver) {
   const d = design(id);
-  Object.assign(sel, { id, colour: cId && d.colours.includes(cId) ? cId : d.colours[0], size: null, view: "flat" });
+  Object.assign(sel, { id, colour: cId && d.colours.includes(cId) ? cId : d.colours[0], size: null, view: ver === "chest" ? "close" : "flat", version: ver || "front" });
   $("#sheet-msg").textContent = "";
   renderSheet();
   if (!$("#sheet").open) $("#sheet").showModal();
 }
 function renderSheet() {
   const d = design(sel.id), c = colour(sel.colour);
-  $("#gallery-main").innerHTML = shirt(d, c.id, { view: sel.view });
-  $("#thumbs").innerHTML = ["flat", "close"].map((v) => `<button type="button" data-view="${v}" aria-pressed="${sel.view === v}" aria-label="${t(v === "flat" ? "viewFlat" : "viewClose")}">${shirt(d, c.id, { view: v })}</button>`).join("");
+  const ver = sel.version, pr = printOf(d, ver);
+  $("#gallery-main").innerHTML = shirt(d, c.id, { view: sel.view, version: ver });
+  $("#thumbs").innerHTML = ["flat", "close"].map((v) => `<button type="button" data-view="${v}" aria-pressed="${sel.view === v}" aria-label="${t(v === "flat" ? "viewFlat" : "viewClose")}">${shirt(d, c.id, { view: v, version: ver })}</button>`).join("");
+  $("#sheet-print").innerHTML = [["front", t("pFront"), t("pFrontSub", d.widthCm)], ["chest", t("pChest"), t("pChestSub", shop.chestLogoCm)]].map(([v, a, b]) =>
+    `<button type="button" data-pick-print="${v}" aria-pressed="${ver === v}">${a}<small>${b}</small></button>`).join("");
   $("#sheet-place").textContent = d.collections.map((x) => L(coll(x))).join(" · ");
   $("#sheet-title").textContent = t("tee", L(d));
   $("#sheet-price").textContent = money(shop.pricePerTee);
@@ -327,9 +346,9 @@ function renderSheet() {
   $("#sheet-sizes").innerHTML = shop.sizes.map((s) => `<button type="button" data-pick-size="${s.id}" aria-pressed="${s.id === sel.size}">${s.id}</button>`).join("");
   const s = shop.sizes.find((x) => x.id === sel.size);
   $("#size-hint").textContent = s ? t("sizeFits", s.height, s.weight) : "";
-  $("#details").innerHTML = [d.placement === "chest" ? t("dChest", d.widthCm) : t("dFront", d.widthCm), t("dCotton"), t("dPrinted")].map((x) => `<li>${x}</li>`).join("");
-  $("#scale-cap").textContent = t("scaleCap", d.widthCm);
-  $("#scale-svg").innerHTML = scaleSVG(d);
+  $("#details").innerHTML = [ver === "chest" ? t("dLogo", pr.widthCm) : d.placement === "chest" ? t("dChest", d.widthCm) : t("dFront", d.widthCm), t("dCotton"), t("dPrinted")].map((x) => `<li>${x}</li>`).join("");
+  $("#scale-cap").textContent = t("scaleCap", pr.widthCm);
+  $("#scale-svg").innerHTML = scaleSVG(d, ver);
 }
 
 function renderBag() {
@@ -341,8 +360,8 @@ function renderBag() {
   $("#lines").innerHTML = bag.map((l, i) => {
     const d = design(l.id), c = colour(l.colour);
     return `<li class="line">
-      <div class="line-img">${shirt(d, c.id)}</div>
-      <div><div class="line-name">${t("tee", L(d))}</div><div class="line-sub">${L(c)}, ${l.size}</div>
+      <div class="line-img">${shirt(d, c.id, { version: l.print })}</div>
+      <div><div class="line-name">${t("tee", L(d))}</div><div class="line-sub">${L(c)}, ${l.size}, ${l.print === "chest" ? t("lineChest", shop.chestLogoCm) : t("lineFront")}</div>
         <div class="qty"><button type="button" data-qty="${i}" data-step="-1" aria-label="${t("remove")}">−</button><span>${l.qty}</span><button type="button" data-qty="${i}" data-step="1" aria-label="${t("addAnother")}">+</button></div></div>
       <div class="line-price">${money(l.qty * shop.pricePerTee)}</div></li>`;
   }).join("");
@@ -365,8 +384,8 @@ function save() { store.set("bag", bag); renderBag(); }
 
 function addToBag() {
   if (!sel.size) { $("#sheet-msg").textContent = t("pickSize"); return; }
-  const hit = bag.find((l) => l.id === sel.id && l.colour === sel.colour && l.size === sel.size);
-  if (hit) hit.qty += 1; else bag.push({ id: sel.id, colour: sel.colour, size: sel.size, qty: 1 });
+  const hit = bag.find((l) => l.id === sel.id && l.colour === sel.colour && l.size === sel.size && l.print === sel.version);
+  if (hit) hit.qty += 1; else bag.push({ id: sel.id, colour: sel.colour, size: sel.size, print: sel.version, qty: 1 });
   save();
   $("#sheet-msg").textContent = t("added", totals().qty);
 }
@@ -388,7 +407,7 @@ async function placeOrder(e) {
   const { total } = totals();
   const num = orderNumber();
   form.order_number.value = num;
-  form.items.value = JSON.stringify(bag.map(({ id, colour, size, qty }) => ({ id, colour, size, qty })));
+  form.items.value = JSON.stringify(bag.map(({ id, colour, size, qty, print }) => ({ id, colour, size, qty, print })));
   form.total.value = total;
   form.lang.value = lang;
   const btn = $("#place-order");
@@ -424,11 +443,11 @@ function setFilter(f) {
 /* ---------- Boot ---------- */
 async function boot() {
   shop = await (await fetch("/shop.json")).json();
-  const names = shop.designs.flatMap((d) => d.colours.map((c) => `${d.id}-${c}`));
+  const names = shop.designs.flatMap((d) => d.colours.flatMap((c) => [`${d.id}-${c}`, `${d.id}-${c}-chest`]));
   const files = await Promise.all(names.map((n) => fetch(`/print/${n}.svg`).then((r) => r.text())));
   names.forEach((n, i) => { prints[n] = files[i]; });
 
-  bag = store.get("bag", []).filter((l) => design(l.id) && design(l.id).colours.includes(l.colour) && shop.sizes.some((s) => s.id === l.size));
+  bag = store.get("bag", []).map((l) => ({ ...l, print: l.print === "chest" ? "chest" : "front" })).filter((l) => design(l.id) && design(l.id).colours.includes(l.colour) && shop.sizes.some((s) => s.id === l.size));
   lang = store.get("lang", null) || ((navigator.language || "").toLowerCase().startsWith("th") ? "th" : "en");
   $("#preview").hidden = shop.pricesConfirmed;
   const link = $("#contact-link");
@@ -441,12 +460,15 @@ async function boot() {
     if (!b) return;
     const ds = b.dataset;
     if (ds.lang) { lang = ds.lang; store.set("lang", lang); renderAll(); }
-    else if (ds.open) openSheet(ds.open, ds.colour);
+    else if (ds.open) openSheet(ds.open, ds.colour, ds.ver);
+    else if (ds.version) { version = ds.version; renderGrid(); $(`[data-version="${version}"]`).focus(); }
+    else if (ds.navChest !== undefined) { version = "chest"; setFilter("all"); }
+    else if (ds.pickPrint) { sel.version = ds.pickPrint; sel.view = sel.version === "chest" ? "close" : "flat"; renderSheet(); $(`[data-pick-print="${sel.version}"]`).focus(); }
     else if (ds.openLink) { e.preventDefault(); openSheet(ds.openLink); }
     else if (ds.swatch) { cardColour[ds.card] = ds.swatch; renderGrid(); $(`[data-card="${ds.card}"][data-swatch="${ds.swatch}"]`).focus(); }
     else if (ds.chip) setFilter(ds.chip);
     else if (ds.filter) setFilter(ds.filter);
-    else if (ds.navAll !== undefined) setFilter("all");
+    else if (ds.navAll !== undefined) { version = "front"; setFilter("all"); }
     else if (ds.view) { sel.view = ds.view; renderSheet(); $(`[data-view="${ds.view}"]`).focus(); }
     else if (ds.pickColour) { sel.colour = ds.pickColour; renderSheet(); $(`[data-pick-colour="${sel.colour}"]`).focus(); }
     else if (ds.pickSize) { sel.size = ds.pickSize; $("#sheet-msg").textContent = ""; renderSheet(); $(`[data-pick-size="${sel.size}"]`).focus(); }

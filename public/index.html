@@ -29,6 +29,7 @@
           <button type="button" aria-expanded="false" aria-controls="places-menu" id="places-btn" data-i18n="navPlaces">Shop by place</button>
           <ul id="places-menu" hidden></ul>
         </div>
+        <a href="#shop" data-nav-chest data-i18n="navChest">Chest logos</a>
         <a href="#sizes" data-i18n="navSizes">Sizes</a>
         <a href="#story" data-i18n="navStory">Our story</a>
         <a href="#faq" data-i18n="navHelp">Help</a>
@@ -79,7 +80,10 @@
 
     <section class="shop" id="shop" aria-labelledby="shop-h">
       <div class="head">
-        <h2 id="shop-h" data-i18n="shopH">The tees</h2>
+        <div>
+          <h2 id="shop-h" data-i18n="shopH">The tees</h2>
+          <div class="versions" id="versions" role="group" aria-label="Print style"></div>
+        </div>
         <div class="chips" id="chips" role="group" aria-label="Filter by place"></div>
       </div>
       <ul class="grid" id="grid"></ul>
@@ -198,6 +202,10 @@
         <h2 id="sheet-title"></h2>
         <p class="sheet-price" id="sheet-price"></p>
         <p class="sheet-blurb" id="sheet-blurb"></p>
+        <fieldset class="opts">
+          <legend data-i18n="printLabel">Print</legend>
+          <div class="print-pick" id="sheet-print"></div>
+        </fieldset>
         <fieldset class="opts">
           <legend><span data-i18n="colour">Colour</span>: <span id="colour-name"></span></legend>
           <div class="swatches" id="sheet-colours"></div>

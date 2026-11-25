@@ -11,12 +11,12 @@ Pre-launch. Prices are placeholders (`pricesConfirmed: false` shows a preview ba
 ## Layout
 
 - `public/` the site: `index.html`, `styles.css`, `app.js`, `shop.json`, `js/shirt.js` (draws the flat-lay tee mockups), `img/hero.svg`, `fonts/` (Oswald and Bai Jamjuree, self-hosted)
-- `public/print/` print files per design and shirt colour: outlined SVG and 300 dpi transparent PNG, plus `manifest.json`
+- `public/print/` print files per design and shirt colour: outlined SVG and 300 dpi transparent PNG, plus `manifest.json`. Files ending `-chest` are the 4 cm left-chest logo version
 - `public/mockups/` 1600 x 1600 flat-lay proof JPGs (used in emails)
 - `netlify/functions/submission-created.mjs` emails the customer (EN or TH) with proofs and a PromptPay QR, and emails you the print files
 - `netlify/functions/promptpay-qr.mjs` serves `/qr/promptpay/<amount>.png`
 - `netlify/lib/` PromptPay payload and order checking (the server recalculates totals from `shop.json`)
-- `tools/designs.mjs` the artwork, drawn in millimetres; text is converted to outlines
+- `tools/designs.mjs` the artwork, drawn in code; text is converted to outlines. `tools/thai.mjs` shapes Thai text with HarfBuzz
 - `tools/build-designs.mjs` rebuilds every print file and proof
 - `tests/` PromptPay payloads checked against published examples, order maths and email escaping
 

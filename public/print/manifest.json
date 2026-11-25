@@ -1,101 +1,246 @@
 {
-  "doi-inthanon": {
+  "farang": {
     "black": {
-      "widthCm": 26,
-      "widthPx300": 3071,
-      "placement": "front"
-    },
-    "forest": {
-      "widthCm": 26,
-      "widthPx300": 3071,
-      "placement": "front"
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     },
     "white": {
-      "widthCm": 26,
-      "widthPx300": 3071,
-      "placement": "front"
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    }
+  },
+  "doi-inthanon": {
+    "black": {
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "forest": {
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "white": {
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     }
   },
   "phang-nga-bay": {
     "white": {
-      "widthCm": 26,
-      "widthPx300": 3071,
-      "placement": "front"
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     },
     "black": {
-      "widthCm": 26,
-      "widthPx300": 3071,
-      "placement": "front"
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     },
     "sand": {
-      "widthCm": 26,
-      "widthPx300": 3071,
-      "placement": "front"
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     }
   },
   "bangkok-1782": {
     "black": {
-      "widthCm": 28,
-      "widthPx300": 3308,
-      "placement": "front"
+      "front": {
+        "widthCm": 28,
+        "widthPx300": 3308,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     },
     "white": {
-      "widthCm": 28,
-      "widthPx300": 3308,
-      "placement": "front"
+      "front": {
+        "widthCm": 28,
+        "widthPx300": 3308,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     }
   },
   "tukkae-night-shift": {
     "black": {
-      "widthCm": 26,
-      "widthPx300": 3071,
-      "placement": "front"
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     },
     "forest": {
-      "widthCm": 26,
-      "widthPx300": 3071,
-      "placement": "front"
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     }
   },
   "similan-turtle": {
     "white": {
-      "widthCm": 26,
-      "widthPx300": 3071,
-      "placement": "front"
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     },
     "black": {
-      "widthCm": 26,
-      "widthPx300": 3071,
-      "placement": "front"
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     },
     "sand": {
-      "widthCm": 26,
-      "widthPx300": 3071,
-      "placement": "front"
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     }
   },
   "monsoon-club": {
     "black": {
-      "widthCm": 27,
-      "widthPx300": 3189,
-      "placement": "front"
+      "front": {
+        "widthCm": 27,
+        "widthPx300": 3189,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     },
     "white": {
-      "widthCm": 27,
-      "widthPx300": 3189,
-      "placement": "front"
+      "front": {
+        "widthCm": 27,
+        "widthPx300": 3189,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     }
   },
   "soi-dog": {
     "white": {
-      "widthCm": 9,
-      "widthPx300": 1063,
-      "placement": "chest"
+      "front": {
+        "widthCm": 9,
+        "widthPx300": 1063,
+        "placement": "chest"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     },
     "black": {
-      "widthCm": 9,
-      "widthPx300": 1063,
-      "placement": "chest"
+      "front": {
+        "widthCm": 9,
+        "widthPx300": 1063,
+        "placement": "chest"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
     }
   }
 }

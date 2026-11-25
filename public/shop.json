@@ -93,6 +93,25 @@
   "accent": "#F2B517",
   "designs": [
     {
+      "id": "farang",
+      "name": "Farang",
+      "nameTh": "ฝรั่ง",
+      "widthCm": 26,
+      "placement": "front",
+      "colours": [
+        "black",
+        "white"
+      ],
+      "collections": [
+        "bangkok"
+      ],
+      "blurb": "ฝรั่ง in bold Thai lettering over half a guava. It means foreigner, and it also means guava.",
+      "blurbTh": "คำว่าฝรั่งตัวหนาบนฝรั่งผ่าครึ่ง แปลว่าคนต่างชาติ และก็แปลว่าผลไม้ด้วย",
+      "badge": "new",
+      "story": "Every foreigner in Thailand hears it, usually from a smiling kid in a 7-Eleven. Nobody tells you at first that it's also the word for guava.",
+      "storyTh": "ฝรั่งทุกคนในเมืองไทยต้องเคยได้ยินคำนี้ ส่วนใหญ่จากเด็กยิ้มแป้นในเซเว่น และไม่มีใครบอกเราตั้งแต่แรกว่ามันแปลว่าผลไม้ด้วย"
+    },
+    {
       "id": "doi-inthanon",
       "name": "Doi Inthanon",
       "nameTh": "ดอยอินทนนท์",
@@ -258,5 +277,6 @@
       "backdrop": "#DDD8C2"
     }
   ],
-  "tagline": "Drawn from real places in Thailand."
+  "tagline": "Drawn from real places in Thailand.",
+  "chestLogoCm": 4
 }
