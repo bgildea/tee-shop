@@ -1,10 +1,13 @@
 // GET /qr/promptpay/<amount>.png  ->  PromptPay QR for that exact amount in THB.
-// Needs PROMPTPAY_ID (Thai mobile number or 13-digit national/tax ID).
+// Pays shop.json promptPayId, or PROMPTPAY_ID if set.
 import QRCode from "qrcode";
 import { promptPayPayload } from "../lib/promptpay.mjs";
+import shop from "../../public/shop.json" with { type: "json" };
+
+const PROMPTPAY_ID = process.env.PROMPTPAY_ID || shop.promptPayId;
 
 export default async (req, context) => {
-  const id = process.env.PROMPTPAY_ID;
+  const id = PROMPTPAY_ID;
   if (!id) return new Response("PromptPay is not set up yet (PROMPTPAY_ID missing).", { status: 503 });
 
   const m = /^(\d{1,6}(?:\.\d{1,2})?)\.png$/.exec(context.params.file || "");

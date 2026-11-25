@@ -2,13 +2,13 @@
 
 ## Idea
 
-The shop sells small left-chest prints, so the site is built around showing real size. The hero is a chest crop with the shirt's centre line drawn in, so "left of centre" is literal. Every product sheet shows the print next to a 10 baht coin (26 mm) and a bank card (85.6 x 54 mm) at the same scale.
+The shop sells small left-chest prints, so the site is built around showing real size. The hero is a black chest crop with the print width marked. Every product sheet shows the print against a centimetre ruler at the same scale.
 
 ## Tokens
 
 - Cotton `#EEEFEA` page
 - Stone `#DADCD7` photo backdrop
-- Ink `#1F2A44` text and print ink on white shirts (screen-print navy, not black)
+- Ink `#1F2A44` text and print ink on white shirts
 - Marigold `#F2B517` the accent dot, used sparingly
 - Thread `#5B6273` secondary text
 

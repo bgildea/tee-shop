@@ -33,8 +33,8 @@ npx netlify dev   # local site with functions
 
 Environment variables:
 
-- `PROMPTPAY_ID` Thai mobile number or 13-digit ID that receives payments
-- `OWNER_EMAIL` gets a copy of every order with print file links
+- `PROMPTPAY_ID` optional, overrides `promptPayId` in `shop.json` (phone, 13-digit ID or 15-digit e-wallet ID)
+- `OWNER_EMAIL` optional, overrides `brand.contactEmail` for the owner copy of each order
 - `MAIL_FROM` optional sender, e.g. `Tee Shop <orders@yourdomain>`
 - Gmail: `GMAIL_USER`, `GMAIL_APP_PASSWORD`, or Brevo: `BREVO_SMTP_USER`, `BREVO_SMTP_KEY` (Brevo wins if both are set)
 

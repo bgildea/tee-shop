@@ -33,16 +33,6 @@ function outline(font, text, { x = 0, y = 0, height, letterSpacing = 0 }) {
 const r = (n) => Math.round(n * 1000) / 1000;
 
 export const designs = {
-  "left-of-centre"() {
-    // Ring, accent dot pushed left, a small cross where the centre really is.
-    const w = 45, h = 45, c = 22.5;
-    const body = `
-  <circle cx="${c}" cy="${c}" r="20.6" fill="none" stroke="INK" stroke-width="3.4"/>
-  <circle cx="13.2" cy="${c}" r="6.2" fill="ACCENT"/>
-  <path d="M${c - 2.2} ${c}H${c + 2.2}M${c} ${c - 2.2}V${c + 2.2}" stroke="INK" stroke-width="1.1" stroke-linecap="round"/>`;
-    return { w, h, body };
-  },
-
   "bangkok-coordinates"() {
     const w = 60;
     const line2 = outline(latin600, "100.50° E", { height: 10 });

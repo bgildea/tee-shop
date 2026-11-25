@@ -22,8 +22,8 @@ export function printBox(widthCm, aspect) {
 }
 
 // print: { svg: full SVG string, widthCm }
-// opts.viewBox crops the frame; opts.annotate draws the centre line and width mark.
-export function shirtSVG({ fabric, print, uid = "s", viewBox, annotate = false, title = "", centreLabel = "centre", cmLabel = "cm" }) {
+// opts.viewBox crops the frame; opts.annotate draws the print width mark.
+export function shirtSVG({ fabric, print, uid = "s", viewBox, annotate = false, title = "", cmLabel = "cm" }) {
   const curve = `C560 250 700 ${NECK_BOTTOM} ${CX} ${NECK_BOTTOM}C1100 ${NECK_BOTTOM} 1240 250 1332 40`;
   const neck = `M468 40${curve}`;
   const rib = `M468 60C562 292 702 ${NECK_BOTTOM + 52} ${CX} ${NECK_BOTTOM + 52}C1098 ${NECK_BOTTOM + 52} 1238 292 1332 60`;
@@ -46,12 +46,10 @@ export function shirtSVG({ fabric, print, uid = "s", viewBox, annotate = false, 
     const lineCol = isLight ? "#1F2A44" : "#F3F1EA";
     notes = `
     <g class="notes" stroke="${lineCol}" fill="none" stroke-width="3" opacity=".75">
-      <path d="M${CX} ${NECK_BOTTOM + 140}V1350" stroke-dasharray="14 12"/>
       <path d="M${box.x} ${y}H${box.x + box.w}M${box.x} ${y - 22}V${y + 22}M${box.x + box.w} ${y - 22}V${y + 22}"/>
     </g>
     <g fill="${lineCol}" font-family="Bai Jamjuree, sans-serif" font-size="40" font-weight="500">
       <text x="${box.x + box.w / 2}" y="${y + 70}" text-anchor="middle">${print.widthCm} ${cmLabel}</text>
-      <text x="${CX - 24}" y="1300" text-anchor="end" class="centre-label">${centreLabel}</text>
     </g>`;
   }
 

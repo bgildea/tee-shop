@@ -25,14 +25,17 @@
 ## Shop settings
 - Price per tee: TBD THB. Delivery: TBD THB. Free delivery from 2 tees
 - Sizes S to 2XL. Size table currently uses typical values (100% cotton, chest 51 cm, length 73 cm), to be replaced with the printer's real blanks
-- Payment: PromptPay QR
+- Payment: PromptPay QR to e-wallet ID 004999038380795 (from the K PLUS QR, 25 Nov 2026)
+- Shirts: black and white only
+- Times: printing 7 to 10 working days, delivery 3 to 5 working days, about 3 weeks door to door
+- Contact and owner email: design@brickisred.com
 
 ## Design and print files
 - All designs left chest
 - Per design and shirt colour: outlined SVG, 300 dpi transparent PNG (709 px for 6 cm, 532 px for 4.5 cm), 1800x1350 chest proof JPG
 
 ## Copy
-- Headline: "Good design, left of centre." / "ดีไซน์ดี อยู่ตรงอกซ้าย"
+- Headline: "Small prints, close to the heart." / "ลายเล็ก ใกล้หัวใจ" (the old "left of centre" line and design are dropped for good)
 - Open: QR timing copy vs instant email; returns policy to confirm; Thai copy needs a native speaker check
 
 ## To do

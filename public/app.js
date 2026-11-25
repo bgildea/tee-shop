@@ -10,17 +10,16 @@ const T = {
     skip: "Skip to the tees",
     preview: "Preview shop. Prices are placeholders and orders are not live yet.",
     navShop: "Tees", navSizes: "Sizes", navHelp: "Help", bag: "Bag",
-    headline: "Good design, left of centre.",
+    headline: "Small prints, close to the heart.",
     lede: "Small prints for the left side of your chest, on soft 100% cotton. Each tee is printed when you order it and sent anywhere in Thailand.",
     heroCta: "See the tees",
     priceFrom: (p) => `${p} a tee`,
-    centreLabel: "centre",
-    heroCap: "Left of centre, 4.5 cm wide. The dashed line is the middle of the shirt.",
+    heroCap: "Mango sticky rice on a black tee. The print is 6 cm wide.",
     fact1: "Printed to order in Thailand",
     factDelivery: (n) => `Free delivery when you buy ${n} or more`,
     fact3: "Pay with any Thai banking app by PromptPay",
     shopH: "The tees",
-    shopP: "Pick a print, then the shirt colour and size. Every design comes on white, navy and black.",
+    shopP: "Pick a print, then the shirt colour and size. Every design comes on black or white.",
     printWide: (cm) => `Print ${cm} cm wide`,
     on: (c) => `on ${c}`,
     sizesH: "Find your size",
@@ -31,11 +30,11 @@ const T = {
     howH: "How ordering works",
     s1h: "Order", s1p: "Add tees to your bag and fill in where to send them. You get an order number straight away.",
     s2h: "Pay by PromptPay", s2p: "Scan the QR code on screen, or the one in your email, with any Thai banking app. The amount is already filled in.",
-    s3h: "We print it", s3p: "Once the payment shows up, your tee goes to print. This usually takes 2 to 4 working days.",
-    s4h: "It arrives", s4p: "We post it with tracking. Most addresses in Thailand get it 1 to 3 days later.",
+    s3h: "We print it", s3p: "Once the payment shows up, your tee goes to print. Printing takes 7 to 10 working days.",
+    s4h: "It arrives", s4p: "We post it with tracking, and it takes another 3 to 5 working days to reach you. Allow about 3 weeks from order to door.",
     faqH: "Questions",
     q1: "Why only small prints?", a1: "A small print looks good with everything and doesn't crack across your chest after a few washes. We think it's the better tee.",
-    q2: "How big is the print?", a2: "Each design lists its width. Most are 4.5 cm or 6 cm wide. Open a design to see it next to a 10 baht coin and a bank card for scale.",
+    q2: "How big is the print?", a2: "Each design lists its width. Most are 4.5 cm or 6 cm wide. Open a design to see it against a ruler.",
     q3: "What if it doesn't fit?", a3: "Each tee is printed for you, so we can't take back the wrong size. If it arrives damaged or misprinted, email us a photo within 7 days and we'll send a new one.",
     q4: "How do I wash it?", a4: "Inside out, cool water, no tumble dryer. Don't iron over the print.",
     q5: "Can I pay another way?", a5: "Not yet. PromptPay works with every Thai bank app, and card payments are coming later.",
@@ -44,8 +43,7 @@ const T = {
     close: "Close",
     colour: "Shirt colour", size: "Size", sizeGuide: "Size guide",
     add: "Add to bag", added: (n) => `Added. You have ${n} in your bag.`, pickSize: "Pick a size first.",
-    scaleCap: (cm) => `The print is ${cm} cm wide, shown here next to a 10 baht coin and a bank card at the same scale.`,
-    coin: "10 baht coin", card: "Bank card", print: "Print",
+    scaleCap: (cm) => `The print is ${cm} cm wide, shown against a ruler at the same scale.`,
     bagTitle: "Your bag", empty: "Your bag is empty. Pick a tee to get started.",
     subtotal: "Tees", delivery: "Delivery", free: "Free", total: "Total",
     addOne: (n) => `Add ${n} more tee for free delivery.`, addMany: (n) => `Add ${n} more tees for free delivery.`,
@@ -64,17 +62,16 @@ const T = {
     skip: "ข้ามไปที่เสื้อ",
     preview: "ร้านตัวอย่าง ราคายังไม่ใช่ราคาจริง และยังไม่เปิดรับคำสั่งซื้อ",
     navShop: "เสื้อ", navSizes: "ไซซ์", navHelp: "ช่วยเหลือ", bag: "ตะกร้า",
-    headline: "ดีไซน์ดี\nอยู่ตรงอกซ้าย",
+    headline: "ลายเล็ก\nใกล้หัวใจ",
     lede: "ลายเล็กบนอกซ้าย บนเสื้อคอตตอน 100% เนื้อนุ่ม เราพิมพ์เสื้อทุกตัวหลังคุณสั่ง แล้วส่งให้ทั่วประเทศไทย",
     heroCta: "ดูเสื้อทั้งหมด",
     priceFrom: (p) => `ตัวละ ${p}`,
-    centreLabel: "กึ่งกลาง",
-    heroCap: "ลาย Left of centre กว้าง 4.5 ซม. เส้นประคือกึ่งกลางเสื้อ",
+    heroCap: "ข้าวเหนียวมะม่วงบนเสื้อสีดำ ลายกว้าง 6 ซม.",
     fact1: "พิมพ์ตามสั่งในประเทศไทย",
     factDelivery: (n) => `ส่งฟรีเมื่อซื้อ ${n} ตัวขึ้นไป`,
     fact3: "จ่ายด้วยพร้อมเพย์ผ่านแอปธนาคารไหนก็ได้",
     shopH: "เสื้อทั้งหมด",
-    shopP: "เลือกลาย แล้วเลือกสีเสื้อและไซซ์ ทุกลายมีเสื้อสีขาว กรมท่า และดำ",
+    shopP: "เลือกลาย แล้วเลือกสีเสื้อและไซซ์ ทุกลายมีเสื้อสีดำและสีขาว",
     printWide: (cm) => `ลายกว้าง ${cm} ซม.`,
     on: (c) => `เสื้อสี${c}`,
     sizesH: "เลือกไซซ์ที่ใช่",
@@ -85,11 +82,11 @@ const T = {
     howH: "สั่งซื้ออย่างไร",
     s1h: "สั่งซื้อ", s1p: "ใส่เสื้อลงตะกร้าแล้วกรอกที่อยู่จัดส่ง คุณจะได้เลขคำสั่งซื้อทันที",
     s2h: "จ่ายด้วยพร้อมเพย์", s2p: "สแกน QR บนหน้าจอหรือในอีเมลด้วยแอปธนาคาร ยอดเงินใส่ไว้ให้แล้ว",
-    s3h: "เราพิมพ์เสื้อ", s3p: "เมื่อได้รับเงินแล้ว เสื้อของคุณจะเข้าพิมพ์ ปกติใช้เวลา 2 ถึง 4 วันทำการ",
-    s4h: "ได้รับเสื้อ", s4p: "เราส่งพร้อมเลขพัสดุ ส่วนใหญ่ได้รับภายใน 1 ถึง 3 วัน",
+    s3h: "เราพิมพ์เสื้อ", s3p: "เมื่อได้รับเงินแล้ว เสื้อของคุณจะเข้าพิมพ์ การพิมพ์ใช้เวลา 7 ถึง 10 วันทำการ",
+    s4h: "ได้รับเสื้อ", s4p: "เราส่งพร้อมเลขพัสดุ ใช้เวลาอีก 3 ถึง 5 วันทำการ รวมแล้วประมาณ 3 สัปดาห์นับจากวันสั่ง",
     faqH: "คำถามที่พบบ่อย",
     q1: "ทำไมมีแต่ลายเล็ก", a1: "ลายเล็กใส่กับอะไรก็เข้า และไม่แตกลายหลังซักไม่กี่ครั้ง เราคิดว่าแบบนี้คือเสื้อที่ดีกว่า",
-    q2: "ลายใหญ่แค่ไหน", a2: "ทุกลายบอกความกว้างไว้ ส่วนใหญ่กว้าง 4.5 หรือ 6 ซม. เปิดดูแต่ละลายเพื่อเทียบกับเหรียญสิบบาทและบัตรธนาคาร",
+    q2: "ลายใหญ่แค่ไหน", a2: "ทุกลายบอกความกว้างไว้ ส่วนใหญ่กว้าง 4.5 หรือ 6 ซม. เปิดดูแต่ละลายเพื่อเทียบกับไม้บรรทัด",
     q3: "ถ้าใส่ไม่พอดีทำอย่างไร", a3: "เสื้อทุกตัวพิมพ์ให้คุณโดยเฉพาะ เราจึงรับคืนกรณีเลือกไซซ์ผิดไม่ได้ ถ้าเสื้อเสียหายหรือพิมพ์ผิด ส่งรูปมาทางอีเมลภายใน 7 วัน เราจะส่งตัวใหม่ให้",
     q4: "ซักอย่างไร", a4: "กลับด้านเสื้อ ซักน้ำเย็น ไม่อบแห้ง และไม่รีดทับลาย",
     q5: "จ่ายทางอื่นได้ไหม", a5: "ตอนนี้ยังไม่ได้ พร้อมเพย์ใช้ได้กับแอปธนาคารทุกแห่ง และจะเพิ่มการจ่ายด้วยบัตรในภายหลัง",
@@ -98,8 +95,7 @@ const T = {
     close: "ปิด",
     colour: "สีเสื้อ", size: "ไซซ์", sizeGuide: "ตารางไซซ์",
     add: "ใส่ตะกร้า", added: (n) => `เพิ่มแล้ว ตอนนี้มี ${n} ตัวในตะกร้า`, pickSize: "กรุณาเลือกไซซ์ก่อน",
-    scaleCap: (cm) => `ลายกว้าง ${cm} ซม. เทียบกับเหรียญสิบบาทและบัตรธนาคารในสัดส่วนเดียวกัน`,
-    coin: "เหรียญสิบบาท", card: "บัตรธนาคาร", print: "ลาย",
+    scaleCap: (cm) => `ลายกว้าง ${cm} ซม. เทียบกับไม้บรรทัดในสัดส่วนเดียวกัน`,
     bagTitle: "ตะกร้าของคุณ", empty: "ตะกร้ายังว่าง เลือกเสื้อได้เลย",
     subtotal: "ค่าเสื้อ", delivery: "ค่าส่ง", free: "ฟรี", total: "รวม",
     addOne: (n) => `เพิ่มอีก ${n} ตัวเพื่อส่งฟรี`, addMany: (n) => `เพิ่มอีก ${n} ตัวเพื่อส่งฟรี`,
@@ -156,14 +152,14 @@ function applyLang() {
 }
 
 function renderHero() {
-  const d = design("left-of-centre"), c = colour("navy");
-  $("#hero-shirt").innerHTML = shirt(d, c, { uid: "hero", annotate: true, centreLabel: t("centreLabel"), cmLabel: t("cm"), viewBox: "280 270 1440 1080" });
+  const d = design("mango-sticky-rice"), c = colour("black");
+  $("#hero-shirt").innerHTML = shirt(d, c, { uid: "hero", annotate: true, cmLabel: t("cm"), viewBox: "280 270 1440 1080" });
 }
 
 const tileColour = {};
 function renderGrid() {
   $("#grid").innerHTML = shop.designs.map((d) => {
-    const c = colour(tileColour[d.id] || "white");
+    const c = colour(tileColour[d.id] || shop.colours[0].id);
     return `<li class="tile">
       <button type="button" data-open="${d.id}" aria-label="${dname(d)}, ${money(shop.pricePerTee)}">
         <div class="tile-img">${shirt(d, c, { uid: "tile", viewBox: TILE_VIEW })}</div>
@@ -184,31 +180,33 @@ function renderSizes() {
     </tbody>`;
 }
 
-// Print, 10 baht coin (26 mm) and a bank card (85.6 x 54 mm), all at one scale.
+// The print above a centimetre ruler, both at one scale.
 function scaleSVG(d) {
   const k = 30; // px per cm
   const pw = d.widthCm * k;
-  const vb = prints[`${d.id}-white`].match(/viewBox="([^"]+)"/)[1].split(" ").map(Number);
+  const art = prints[`${d.id}-white`];
+  const vb = art.match(/viewBox="([^"]+)"/)[1].split(" ").map(Number);
   const ph = pw * (vb[3] / vb[2]);
-  const coin = 2.6 * k, cw = 8.56 * k, ch = 5.4 * k;
-  const base = ch + 4;
-  const xCoin = pw + 36, xCard = xCoin + coin + 36;
-  const inner = prints[`${d.id}-white`].replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
-  const label = (x, s) => `<text x="${x}" y="${base + 26}" text-anchor="middle">${s}</text>`;
-  return `<svg viewBox="0 0 ${xCard + cw + 2} ${base + 36}" role="img" aria-label="${t("scaleCap", d.widthCm)}">
-    <svg x="0" y="${base - ph}" width="${pw}" height="${ph}" viewBox="${vb.join(" ")}">${inner}</svg>
-    <circle cx="${xCoin + coin / 2}" cy="${base - coin / 2}" r="${coin / 2 - 1}" fill="#D9D3C2" stroke="#9C9580" stroke-width="2"/>
-    <circle cx="${xCoin + coin / 2}" cy="${base - coin / 2}" r="${coin / 2 - 9}" fill="#C9C9C4" stroke="#9C9580" stroke-width="1.5"/>
-    <rect x="${xCard}" y="${base - ch}" width="${cw}" height="${ch}" rx="10" fill="#fff" stroke="#9AA0AB" stroke-width="2"/>
-    <rect x="${xCard + 22}" y="${base - ch + 50}" width="40" height="30" rx="5" fill="#E2E3DF"/>
-    <g fill="#5B6273" font-family="Bai Jamjuree, sans-serif" font-size="15" font-weight="500">
-      ${label(pw / 2, `${t("print")} ${d.widthCm} ${t("cm")}`)}${label(xCoin + coin / 2, t("coin"))}${label(xCard + cw / 2, t("card"))}
-    </g></svg>`;
+  const len = Math.ceil(d.widthCm) + 2; // ruler length in cm
+  const x0 = 10, top = ph + 16, w = len * k;
+  const inner = art.replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
+  let ticks = "", nums = "";
+  for (let mm = 0; mm <= len * 10; mm++) {
+    const x = x0 + (mm * k) / 10, h = mm % 10 === 0 ? 16 : mm % 5 === 0 ? 11 : 6;
+    ticks += `M${x} ${top}v${h}`;
+    if (mm % 10 === 0) nums += `<text x="${x}" y="${top + 34}" text-anchor="middle">${mm / 10}</text>`;
+  }
+  return `<svg viewBox="0 0 ${w + x0 * 2 + 30} ${top + 44}" role="img" aria-label="${t("scaleCap", d.widthCm)}">
+    <svg x="${x0}" y="0" width="${pw}" height="${ph}" viewBox="${vb.join(" ")}">${inner}</svg>
+    <rect x="${x0 - 6}" y="${top}" width="${w + 12}" height="40" rx="3" fill="#fff" stroke="#C3C6C0"/>
+    <path d="${ticks}" stroke="#1F2A44" stroke-width="1"/>
+    <g fill="#5B6273" font-family="Bai Jamjuree, sans-serif" font-size="12" font-weight="500">${nums}
+      <text x="${x0 + w + 14}" y="${top + 34}">${t("cm")}</text></g></svg>`;
 }
 
 const sel = { id: null, colour: "white", size: null };
 function openSheet(id) {
-  sel.id = id; sel.colour = tileColour[id] || "white"; sel.size = null;
+  sel.id = id; sel.colour = tileColour[id] || shop.colours[0].id; sel.size = null;
   $("#sheet-msg").textContent = "";
   renderSheet();
   $("#sheet").showModal();

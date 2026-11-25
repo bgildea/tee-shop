@@ -1,56 +1,30 @@
 {
-  "left-of-centre": {
-    "white": {
-      "widthCm": 4.5,
-      "widthPx300": 532
-    },
-    "navy": {
-      "widthCm": 4.5,
-      "widthPx300": 532
-    },
-    "black": {
-      "widthCm": 4.5,
-      "widthPx300": 532
-    }
-  },
   "bangkok-coordinates": {
-    "white": {
-      "widthCm": 6,
-      "widthPx300": 709
-    },
-    "navy": {
-      "widthCm": 6,
-      "widthPx300": 709
-    },
     "black": {
+      "widthCm": 6,
+      "widthPx300": 709
+    },
+    "white": {
       "widthCm": 6,
       "widthPx300": 709
     }
   },
   "mango-sticky-rice": {
-    "white": {
-      "widthCm": 6,
-      "widthPx300": 709
-    },
-    "navy": {
-      "widthCm": 6,
-      "widthPx300": 709
-    },
     "black": {
+      "widthCm": 6,
+      "widthPx300": 709
+    },
+    "white": {
       "widthCm": 6,
       "widthPx300": 709
     }
   },
   "fon": {
-    "white": {
-      "widthCm": 4.5,
-      "widthPx300": 532
-    },
-    "navy": {
-      "widthCm": 4.5,
-      "widthPx300": 532
-    },
     "black": {
+      "widthCm": 4.5,
+      "widthPx300": 532
+    },
+    "white": {
       "widthCm": 4.5,
       "widthPx300": 532
     }

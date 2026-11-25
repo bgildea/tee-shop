@@ -3,15 +3,19 @@
 // and emails the owner the print files for each line.
 //
 // Environment variables:
-//   PROMPTPAY_ID            Thai mobile number or 13-digit ID that receives payments
-//   OWNER_EMAIL             where the owner copy goes (optional)
+//   PROMPTPAY_ID            overrides shop.json promptPayId (phone, 13-digit ID or 15-digit e-wallet ID)
+//   OWNER_EMAIL             overrides shop.json brand.contactEmail for the owner copy
 //   MAIL_FROM               e.g. "Tee Shop <orders@yourdomain>" (defaults to the SMTP user)
 //   Gmail:  GMAIL_USER, GMAIL_APP_PASSWORD
 //   Brevo:  BREVO_SMTP_USER, BREVO_SMTP_KEY   (used if set, instead of Gmail)
 import nodemailer from "nodemailer";
 import QRCode from "qrcode";
 import { promptPayPayload } from "../lib/promptpay.mjs";
-import { checkOrder, customerEmail, ownerEmail } from "../lib/order.mjs";
+import { checkOrder, customerEmail, ownerEmail, shop } from "../lib/order.mjs";
+
+// Env vars win; shop.json holds the defaults.
+const PROMPTPAY_ID = process.env.PROMPTPAY_ID || shop.promptPayId;
+const OWNER_EMAIL = process.env.OWNER_EMAIL || shop.brand.contactEmail;
 
 function transport() {
   const env = process.env;
@@ -36,19 +40,19 @@ export default async (req) => {
   const siteUrl = process.env.URL || "";
 
   const jobs = [];
-  if (process.env.PROMPTPAY_ID && order.customer.email) {
-    const qr = await QRCode.toBuffer(promptPayPayload(process.env.PROMPTPAY_ID, order.total), { type: "png", width: 480, margin: 2 });
+  if (PROMPTPAY_ID && order.customer.email) {
+    const qr = await QRCode.toBuffer(promptPayPayload(PROMPTPAY_ID, order.total), { type: "png", width: 480, margin: 2 });
     const { subject, html } = customerEmail(order, siteUrl);
     jobs.push(mail.t.sendMail({
-      from: mail.from, to: order.customer.email, replyTo: process.env.OWNER_EMAIL || undefined, subject, html,
+      from: mail.from, to: order.customer.email, replyTo: OWNER_EMAIL || undefined, subject, html,
       attachments: [{ filename: `promptpay-${order.number}.png`, content: qr, cid: "promptpay-qr" }],
     }));
   } else {
     console.log("PROMPTPAY_ID or customer email missing, customer not emailed:", order.number);
   }
-  if (process.env.OWNER_EMAIL) {
+  if (OWNER_EMAIL) {
     const { subject, html } = ownerEmail(order, siteUrl);
-    jobs.push(mail.t.sendMail({ from: mail.from, to: process.env.OWNER_EMAIL, replyTo: order.customer.email, subject, html }));
+    jobs.push(mail.t.sendMail({ from: mail.from, to: OWNER_EMAIL, replyTo: order.customer.email, subject, html }));
   }
   const results = await Promise.allSettled(jobs);
   results.filter((r) => r.status === "rejected").forEach((r) => console.error("Email failed:", r.reason?.message));
