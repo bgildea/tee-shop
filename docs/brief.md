@@ -2,7 +2,7 @@
 
 ## Basics
 - High-quality print-on-demand T-shirt shop selling in Thailand, no stock held
-- Temporary name "Thursdeys - Quantum Change", must be easy to rename
+- Working name "Tee Shop" (placeholder). Brand name, colours, prices and contact email live in one config file so a rename is a one-line change
 - Static site on Netlify (no WordPress or WooCommerce), switches between English and Thai
 - Not selling yet; no domain until designs and order flow are right
 - Current designs are temporary

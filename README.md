@@ -2,7 +2,7 @@
 
 Print-on-demand T-shirt shop for Thailand. Static site on Netlify, English and Thai, no stock held.
 
-Working name: Thursdeys (temporary, will be renamed).
+Working name: Tee Shop (placeholder, set in one config file so it is easy to rename).
 
 ## Status
 
