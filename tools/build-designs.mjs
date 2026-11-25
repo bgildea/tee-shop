@@ -35,10 +35,10 @@ for (const design of shop.designs) {
     ];
     for (const v of versions) {
       const name = `${design.id}-${colour.id}${v.suffix}`;
-      const svg = svgFor(design.id, { ink: colour.ink, accent: colour.accent, widthCm: v.widthCm, mini: v.mini });
+      const svg = svgFor(design.id, { ink: colour.ink, accent: design.accent || colour.accent, widthCm: v.widthCm, mini: v.mini });
       fs.writeFileSync(out("print", `${name}.svg`), svg);
       execFileSync("rsvg-convert", ["-d", "300", "-p", "300", "-o", out("print", `${name}.png`), out("print", `${name}.svg`)]);
-      const proofSvg = shirtSVG({ fabric: colour.fabric, print: { svg, widthCm: v.widthCm, placement: v.placement }, uid: name });
+      const proofSvg = shirtSVG({ fabric: colour.fabric, heather: colour.heather, print: { svg, widthCm: v.widthCm, placement: v.placement }, uid: name });
       const tmp = out("mockups", `${name}.tmp.svg`);
       fs.writeFileSync(tmp, proofSvg);
       const tmpPng = tmp.replace(".svg", ".png");

@@ -22,7 +22,7 @@ export function printBox(placement, widthCm, aspect) {
 }
 
 // print: { svg, widthCm, placement }. view: "flat" (whole shirt) or "close" (print close-up)
-export function shirtSVG({ fabric, print, uid = "s", view = "flat", backdrop = "#E9E6DF", title = "" }) {
+export function shirtSVG({ fabric, print, uid = "s", view = "flat", backdrop = "#E9E6DF", title = "", heather = false }) {
   const light = isLight(fabric);
   const body = `M408 ${NECK_TOP}C430 ${NECK_DROP + 4} 570 ${NECK_DROP + 4} 592 ${NECK_TOP}L742 172L906 330L820 424L750 368C752 520 748 700 756 862C620 872 380 872 244 862C252 700 248 520 250 368L180 424L94 330L258 172Z`;
   const backNeck = `M408 ${NECK_TOP}C440 ${NECK_TOP - 18} 560 ${NECK_TOP - 18} 592 ${NECK_TOP}C570 ${NECK_DROP - 10} 430 ${NECK_DROP - 10} 408 ${NECK_TOP}Z`;
@@ -50,6 +50,8 @@ export function shirtSVG({ fabric, print, uid = "s", view = "flat", backdrop = "
     <filter id="sh-${uid}" x="-10%" y="-10%" width="120%" height="125%"><feGaussianBlur in="SourceAlpha" stdDeviation="14"/><feOffset dy="16"/><feComponentTransfer><feFuncA type="linear" slope="${light ? 0.22 : 0.35}"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <filter id="soft-${uid}" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="18"/></filter>
     <filter id="knit-${uid}" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4"/><feColorMatrix type="matrix" values="0 0 0 0 ${light ? 0 : 1}  0 0 0 0 ${light ? 0 : 1}  0 0 0 0 ${light ? 0 : 1}  0 0 0 ${light ? 0.07 : 0.06} 0"/></filter>
+    <filter id="fleck-${uid}" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.45 1.6" numOctaves="2" seed="9"/><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.6 0 0 0 -0.78"/></filter>
+    <filter id="fleckd-${uid}" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.5 1.8" numOctaves="2" seed="21"/><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.6 0 0 0 -0.8"/></filter>
     <clipPath id="body-${uid}"><path d="${body}"/></clipPath>
     <linearGradient id="lit-${uid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="${light ? 0.05 : 0.07}"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="${light ? 0.08 : 0.2}"/></linearGradient>
   </defs>
@@ -62,6 +64,7 @@ export function shirtSVG({ fabric, print, uid = "s", view = "flat", backdrop = "
     ${printMarkup}
     <rect x="0" y="0" width="1000" height="1000" fill="url(#lit-${uid})"/>
     <rect x="0" y="0" width="1000" height="1000" filter="url(#knit-${uid})"/>
+    ${heather ? `<rect x="0" y="0" width="1000" height="1000" filter="url(#fleck-${uid})" opacity="${light ? 0.55 : 0.35}"/><rect x="0" y="0" width="1000" height="1000" filter="url(#fleckd-${uid})" opacity="${light ? 0.18 : 0.3}"/>` : ""}
     <path d="M258 172L250 368M742 172L750 368" stroke="${seam}" stroke-width="3" fill="none"/>
     <path d="M190 412L262 345M810 412L738 345" stroke="${seam}" stroke-width="3" fill="none" opacity=".8"/>
     <path d="M250 842C380 852 620 852 750 842" stroke="${seam}" stroke-width="3" fill="none"/>

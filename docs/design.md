@@ -41,3 +41,11 @@ Every design also comes as a 4 cm left-chest logo (`chestLogoCm` in shop.json). 
 `tools/thai.mjs` shapes Thai with HarfBuzz so stacked marks (the ั่ in ฝรั่ง) sit correctly. opentype.js alone overlaps them.
 
 Techniques: procedural ridges, hatching and stipple (seeded, so output is repeatable), SVG masks for knockouts so the shirt shows through, two inks per design (main ink flips between cream and black with the shirt, plus marigold).
+
+## Line series (25 Nov 2026)
+
+Built after a close look at Due South: single-ink pen drawings, "nothing that doesn't need to be there", small place lettering, heathered colourways, and a "The place" note on every product page.
+
+- `tools/pen.mjs` draws strokes as filled outlines with a slight seeded wobble, nib-like width swell and tapered ends, so the art reads hand-drawn rather than plotted
+- Designs: Rama VIII Bridge, Ko Tapu, Whale Shark, Cha Yen (the one exception: tea in orange, set by `accent` on the design), Jai Yen Yen, Doi Luang Chiang Dao
+- Heathered colours (Heather Indigo, Sage, Oat) get a fleck texture in the mockups (`heather: true` on the colour)

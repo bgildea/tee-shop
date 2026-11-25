@@ -8,6 +8,8 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import opentype from "opentype.js";
 import { thaiText } from "./thai.mjs";
+import { stroke, ink, smooth } from "./pen.mjs";
+const ring = (cx, cy, r, n = 16) => Array.from({ length: n }, (_, i) => [cx + Math.cos((i / n) * Math.PI * 2) * r, cy + Math.sin((i / n) * Math.PI * 2) * r]);
 
 const require = createRequire(import.meta.url);
 const font = (pkg, file) => {
@@ -328,6 +330,168 @@ export const designs = {
       ${text("Club", { f: SCRIPT, size: 30, cx: 156, y: 182, rotate: -8, fill: "ACCENT" })}
       ${big(`${text("MAY TO OCTOBER", { f: OSW6, size: 8.6, cx: 62, y: 180, track: 0.26 })}
       ${text("MEMBERS SINCE FOREVER", { f: OSW5, size: 7, cx: 62, y: 191, track: 0.26 })}`)}` };
+  },
+
+  /* ---------- The Line Series: single ink, drawn with a pen, Due South spirit ---------- */
+
+  "rama-viii-bridge"() {
+    const P = (pts, w, o = {}) => stroke(pts, { w, scale: SWM, ...o });
+    let d = "";
+    d += P([[6, 113], [60, 110.5], [130, 108.5], [194, 110]], 2.8, { taper: 0.3 });
+    d += P([[6, 118.5], [70, 116.5], [194, 115.5]], 1.5, { taper: 0.3 });
+    d += P([[55, 142], [59, 120], [64, 94]], 2.8, { taper: 0.2 }) + P([[73, 142], [69, 120], [64, 94]], 2.8, { taper: 0.2 });
+    d += P([[64, 96], [64, 26]], 3.4, { taper: 0.15, wob: 0.15 });
+    const nC = MINI ? 7 : 13;
+    for (let i = 0; i < nC; i++) {
+      const y = 30 + i * (MINI ? 6 : 3.3);
+      d += P([[64, y], [192 - i * (MINI ? 15 : 8.6), 110 - (i * 0.1)]], 0.85, { taper: 0.1, press: 0.05, wob: 0.1 });
+      d += P([[64, y], [9 + i * (MINI ? 7 : 3.7), 113 - i * 0.2]], 0.85, { taper: 0.1, press: 0.05, wob: 0.1 });
+    }
+    if (!MINI) {
+      d += P([[18, 134], [40, 132], [58, 134]], 1.3) + P([[86, 132], [118, 130.5], [146, 132]], 1.3) + P([[120, 141], [150, 139.5], [178, 141]], 1.3) + P([[30, 146], [60, 144.5], [92, 146]], 1.3);
+      d += P([[128, 34], [132, 30], [136, 34]], 1.1) + P([[138, 26], [141, 23], [144, 26]], 1.1);
+    }
+    const sun = stroke(ring(156, 44, 9), { w: 1.6, closed: true, scale: SWM });
+    return { w: 200, h: MINI ? 146 : 172, body: `${ink(d + (MINI ? "" : sun))}${big(text("RAMA VIII BRIDGE  ·  BANGKOK", { f: OSW5, size: 8.4, y: 168, track: 0.3 }))}` };
+  },
+
+  "ko-tapu"() {
+    const P = (pts, w, o = {}) => stroke(pts, { w, scale: SWM, ...o });
+    let d = "";
+    d += P([[93, 140], [91, 128], [88, 112], [84, 96], [80, 80], [78, 64], [81, 55], [89, 49], [100, 47], [110, 49], [117, 57], [118, 71], [114, 87], [110, 103], [107, 119], [106, 132], [105, 140]], 2.5, { taper: 0.2 });
+    d += P([[82, 53], [86, 47], [90, 50], [95, 44], [100, 48], [105, 43], [109, 48], [114, 46], [118, 53]], 1.6, { taper: 0.5 });
+    if (!MINI) {
+      [[106, 58, 76], [110, 62, 90], [104, 76, 108], [101, 96, 128], [112, 72, 82], [97, 64, 84], [90, 92, 112]].forEach(([x, y0, y1], i) => { d += P([[x, y0], [x - 1.5, (y0 + y1) / 2], [x - 2.5, y1]], 0.9, { seed: 300 + i }); });
+    }
+    d += P([[16, 140], [22, 118], [30, 100], [40, 88], [52, 84], [60, 92], [62, 110], [66, 128], [70, 140]], 1.9, { taper: 0.25 });
+    if (!MINI) [[34, 102, 26, 130], [44, 94, 36, 132], [54, 92, 50, 128]].forEach(([a, b, c, e], i) => { d += P([[a, b], [c, e]], 0.9, { seed: 330 + i }); });
+    d += P([[138, 140], [150, 128], [164, 124], [178, 130], [188, 140]], 1.6, { taper: 0.3 });
+    d += P([[6, 141], [194, 141]], 2, { taper: 0.4 });
+    const waves = MINI ? [[30, 150, 80], [110, 150, 170], [60, 160, 130]] : [[14, 149, 60], [72, 149, 86], [112, 149, 176], [30, 156, 104], [120, 156, 152], [58, 163, 92], [104, 163, 140], [84, 170, 118]];
+    waves.forEach(([x0, y, x1], i) => { d += P([[x0, y], [(x0 + x1) / 2, y - 0.6], [x1, y]], 1.2, { seed: 360 + i }); });
+    if (!MINI) d += P([[94, 145], [104, 145]], 1) + P([[96, 148], [102, 148]], 0.9);
+    const boat = `<path d="M146 146C150 148.4 160 148.6 168 146.4L170 143.4C168 144.8 166 145.2 164 145.2H148Z" fill="INK"/>`;
+    return { w: 200, h: MINI ? 172 : 190, body: `${ink(d)}${boat}${big(text("KO TAPU  ·  PHANG NGA", { f: OSW5, size: 9.4, y: 186, track: 0.34 }))}` };
+  },
+
+  "whale-shark"() {
+    const P = (pts, w, o = {}) => stroke(pts, { w, scale: SWM, ...o });
+    const top = [[18, 63], [26, 54], [44, 47], [76, 42], [118, 41], [150, 47], [172, 55], [190, 61]];
+    const bottom = [[190, 68], [170, 74], [140, 80], [100, 83], [62, 81], [38, 75], [24, 69], [18, 64]];
+    let d = "";
+    d += P(top, 2.4, { taper: 0.3 });
+    d += P(bottom, 2.4, { taper: 0.3 });
+    d += P([[189, 61], [198, 45], [209, 28]], 2.2) + P([[209, 28], [205, 46], [199, 63], [205, 73], [211, 81]], 2.2) + P([[211, 81], [200, 73], [189, 68]], 2.2);
+    d += P([[18, 64.5], [30, 67], [42, 66.5]], 1.6);
+    d += P([[78, 77], [90, 96], [104, 101], [98, 86], [92, 78]], 2.1, { taper: 0.4 });
+    d += P([[120, 42], [133, 22], [145, 19], [144, 32], [151, 46]], 2.1, { taper: 0.35 });
+    d += P([[170, 54], [176, 46], [181, 46], [181, 57]], 1.6);
+    const gills = MINI ? 3 : 5;
+    for (let i = 0; i < gills; i++) { const x = 52 + i * (MINI ? 7 : 4.6); d += P([[x, 50], [x + 3, 61], [x + 1, 73]], MINI ? 1.4 : 1.1, { seed: 400 + i }); }
+    d += P([[62, 54], [120, 52], [172, 58]], 1, { taper: 0.6 }) + P([[60, 65], [120, 65], [178, 64]], 1, { taper: 0.6 });
+    let spots = "";
+    const R = rng(44);
+    const yTop = (x) => { for (let i = 1; i < top.length; i++) if (top[i][0] >= x) { const [a, b] = [top[i - 1], top[i]]; return a[1] + ((x - a[0]) / (b[0] - a[0])) * (b[1] - a[1]); } return 60; };
+    const step = MINI ? 11 : 6.2;
+    for (let x = 46; x < 182; x += step) {
+      for (let y = yTop(x) + (MINI ? 5 : 3.6); y < 74 - (x - 46) * 0.06; y += MINI ? 9 : 5.2) {
+        if (y > 51 && y < 56 && x > 62) continue;
+        if (x > 76 && x < 106 && y > 74) continue;
+        spots += `<circle cx="${r2(x + (R() - 0.5) * 1.6)}" cy="${r2(y + (R() - 0.5) * 1.4)}" r="${r2((MINI ? 1.5 : 0.95) + R() * 0.35)}"/>`;
+      }
+    }
+    const eye = `<circle cx="37" cy="58" r="${MINI ? 1.8 : 1.3}"/>`;
+    let extra = "";
+    if (!MINI) {
+      extra += P([[84, 92], [92, 94], [98, 92]], 1.1) + P([[112, 90], [120, 92], [126, 90]], 1.1);
+      extra += stroke(ring(62, 26, 2, 10), { w: 0.9, closed: true }) + stroke(ring(67.5, 16, 1.5, 10), { w: 0.8, closed: true }) + stroke(ring(58.4, 34, 2.6, 10), { w: 1, closed: true });
+    }
+    return {
+      w: 220, h: MINI ? 106 : 128, body: `${ink(d + extra)}<g fill="INK">${spots}${eye}</g>
+      ${big(text("WHALE SHARK", { f: OSW6, size: 12, cx: 110, y: 116, track: 0.34 }))}
+      ${big(text("RICHELIEU ROCK  ·  ANDAMAN SEA", { f: OSW5, size: 6.8, cx: 110, y: 127, track: 0.28 }))}` };
+  },
+
+  "cha-yen"() {
+    const P = (pts, w, o = {}) => stroke(pts, { w, scale: SWM, ...o });
+    const bag = [[71, 50], [54, 70], [42, 108], [43, 148], [56, 170], [80, 177], [104, 170], [117, 148], [118, 108], [106, 70], [89, 50]];
+    const liquidTop = 86;
+    const inside = smooth(bag).filter(([, y]) => y >= liquidTop - 0.5);
+    const liquid = `M${inside.map(([x, y]) => `${r2(x)} ${r2(y)}`).join("L")}Z`;
+    let d = "";
+    d += P(bag, 2.4, { taper: 0.15 });
+    d += P([[71, 50], [74, 43], [80, 40], [86, 43], [89, 50]], 2.2, { taper: 0.2 });
+    d += P([[76, 41], [64, 26], [60, 14], [70, 10], [80, 26], [81, 40]], 1.5, { taper: 0.3 });
+    d += P([[84, 41], [98, 24], [100, 12], [90, 10], [81, 26]], 1.5, { taper: 0.3 });
+    const straw = P([[90, 132], [110, 2]], 5, { taper: 0.05, press: 0, wob: 0.05, seed: 480 });
+    const strawGap = P([[90, 132], [110, 2]], 2.4, { taper: 0, press: 0, wob: 0.05, seed: 480 });
+    let cubes = "";
+    const cubeList = MINI ? [[64, 104, 14, -12], [84, 140, 13, 18]] : [[62, 102, 14, -12], [88, 110, 12, 14], [70, 134, 13, 22], [96, 146, 11, -8], [56, 152, 10, 6]];
+    cubeList.forEach(([x, y, s, a], i) => {
+      const c = Math.cos((a * Math.PI) / 180), sn = Math.sin((a * Math.PI) / 180);
+      const pts = [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([u, v]) => [x + (u * c - v * sn) * s / 2, y + (u * sn + v * c) * s / 2]);
+      cubes += stroke(pts, { w: 1.3, closed: true, scale: SWM, seed: 500 + i });
+    });
+    let shine = MINI ? "" : P([[50, 112], [49, 132], [52, 150]], 1.2) + P([[56, 92], [52, 102]], 1.2);
+    let drops = "";
+    if (!MINI) [[126, 120], [130, 138], [34, 136], [124, 156]].forEach(([x, y]) => { drops += `M${x} ${y - 4}C${x + 2.4} ${y - 1} ${x + 2.4} ${y + 2.4} ${x} ${y + 2.4}C${x - 2.4} ${y + 2.4} ${x - 2.4} ${y - 1} ${x} ${y - 4}Z`; });
+    const word = thaiText("ชาเย็น", { weight: 600, cx: 80, y: 204, fit: MINI ? 110 : 84 });
+    return {
+      w: 160, h: MINI ? 212 : 216, body: `
+      <defs>${knock("cy-cubes", `<path d="${cubes}" fill="#000" stroke="#000" stroke-width="2.4"/>`)}${knock("cy-core", `<path d="${strawGap}" fill="#000"/>`)}</defs>
+      <path d="${liquid}" fill="ACCENT" mask="url(#cy-cubes)"/>
+      ${ink(d)}${ink(cubes)}${shine ? ink(shine) : ""}${drops ? `<path d="${drops}" fill="INK"/>` : ""}
+      <path d="${straw}" fill="INK" mask="url(#cy-core)"/>
+      ${word.markup}` };
+  },
+
+  "jai-yen-yen"() {
+    const P = (pts, w, o = {}) => stroke(pts, { w, scale: SWM, ...o });
+    let d = "";
+    d += P([[30, 116], [33, 92], [38, 66], [46, 36]], 3, { taper: 0.25 }) + P([[172, 116], [168, 92], [164, 68], [158, 40]], 3, { taper: 0.25 });
+    const fronds = (x, y, dir) => [
+      [[x, y], [x - 14 * dir, y - 8], [x - 30 * dir, y - 2]], [[x, y], [x - 10 * dir, y - 16], [x - 22 * dir, y - 18]],
+      [[x, y], [x + 2 * dir, y - 16], [x + 12 * dir, y - 24]], [[x, y], [x + 14 * dir, y - 10], [x + 28 * dir, y - 6]],
+      [[x, y], [x + 12 * dir, y + 2], [x + 22 * dir, y + 14]], [[x, y], [x - 12 * dir, y + 2], [x - 20 * dir, y + 14]],
+    ];
+    fronds(46, 36, 1).concat(fronds(158, 40, -1)).forEach((f, i) => { d += P(f, 2, { taper: 0.9, seed: 600 + i }); });
+    d += P([[36, 72], [54, 80], [70, 84]], 1.3) + P([[166, 74], [148, 82], [134, 86]], 1.3);
+    d += P([[70, 84], [100, 106], [134, 86]], 2.4, { taper: 0.2 }) + P([[70, 84], [102, 98], [134, 86]], 1.6, { taper: 0.2 });
+    if (!MINI) for (let i = 1; i < 8; i++) { const x = 70 + i * 8; const yLow = 84 + Math.sin((i / 8) * Math.PI) * 21, yHi = 84 + Math.sin((i / 8) * Math.PI) * 13; d += P([[x, yHi], [x + 1, yLow]], 0.8, { seed: 640 + i }); }
+    d += P([[10, 117], [100, 115.5], [192, 117]], 1.8, { taper: 0.4 });
+    if (!MINI) d += P([[24, 124], [60, 123]], 1.1) + P([[130, 124], [178, 123]], 1.1);
+    const sun = MINI ? "" : stroke(ring(100, 42, 11), { w: 1.4, closed: true });
+    const word = thaiText("ใจเย็นๆ", { weight: 600, cx: 100, y: MINI ? 168 : 160, fit: MINI ? 140 : 104 });
+    return {
+      w: 200, h: MINI ? 176 : 184, body: `${ink(d + sun)}${word.markup}
+      ${big(text("JAI YEN YEN  ·  KEEP A COOL HEART", { f: OSW5, size: 8, y: 180, track: 0.3 }))}` };
+  },
+
+  "doi-luang-chiang-dao"() {
+    const P = (pts, w, o = {}) => stroke(pts, { w, scale: SWM, ...o });
+    let d = "";
+    d += P([[8, 128], [28, 114], [44, 105], [56, 93], [66, 73], [74, 60], [80, 45], [86, 34], [92, 40], [98, 29], [104, 36], [112, 52], [120, 62], [130, 71], [140, 84], [152, 92], [166, 104], [180, 112], [194, 120]], 2.5, { taper: 0.4 });
+    const ridges = MINI
+      ? [[[86, 36], [80, 70], [72, 104]], [[98, 31], [106, 70], [118, 104]]]
+      : [[[86, 36], [80, 70], [72, 104]], [[98, 31], [106, 70], [118, 104]], [[104, 38], [126, 84], [134, 108]], [[66, 74], [60, 96], [52, 112]], [[140, 86], [150, 106]], [[92, 42], [92, 62]]];
+    ridges.forEach((r, i) => { d += P(r, 1.2, { taper: 0.7, seed: 700 + i }); });
+    if (!MINI) {
+      for (let i = 0; i < 9; i++) { const x = 108 + i * 3.6, y = 60 + i * 5.2; d += P([[x, y], [x - 3, y + 7]], 0.8, { seed: 720 + i }); }
+      for (let i = 0; i < 6; i++) { const x = 76 - i * 3.4, y = 66 + i * 6; d += P([[x, y], [x + 2.6, y + 6]], 0.8, { seed: 740 + i }); }
+    }
+    let trees = "";
+    const R = rng(77);
+    for (let x = 16; x < 186; x += MINI ? 10 : 7.5 + R() * 2.5) {
+      const y = 132 + R() * 3, h = (MINI ? 9 : 6) + R() * 4;
+      const rr = h * 0.5;
+      trees += P([[x - rr, y], [x - rr * 0.95, y - rr * 0.9], [x - rr * 0.4, y - rr * 1.55], [x + rr * 0.3, y - rr * 1.6], [x + rr * 0.9, y - rr * 1.0], [x + rr, y]], MINI ? 1.4 : 1.1, { taper: 0.4, seed: 760 + Math.round(x) });
+    }
+    const mist = MINI ? "" : P([[8, 98], [34, 97]], 1.3) + P([[170, 92], [194, 91.5]], 1.3) + P([[180, 99], [198, 98.5]], 1.1);
+    const sun = MINI ? "" : stroke(ring(152, 46, 10), { w: 1.6, closed: true });
+    return {
+      w: 200, h: MINI ? 140 : 166, body: `${ink(d + trees + mist + sun)}
+      ${big(text("DOI LUANG CHIANG DAO", { f: OSW6, size: 10, y: 152, track: 0.26 }))}
+      ${big(text("CHIANG MAI  ·  THAILAND", { f: OSW5, size: 7.6, y: 164, track: 0.34 }))}` };
   },
 
   // ฝรั่ง: the word for foreigner, and also for guava.

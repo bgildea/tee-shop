@@ -49,7 +49,7 @@ const T = {
     signupH: "New places, first", signupP: "One short email when a new design is out. Nothing else.",
     emailPh: "Your email", signupBtn: "Sign up", signedUp: "You're on the list.", signupFail: "That didn't go through. Try again in a moment.",
     footLine: "Line-art tees drawn from real places in Thailand.", footShop: "Shop", footHelp: "Help", footFaq: "Questions and returns", footPay: "We accept",
-    close: "Close", colour: "Colour", size: "Size", sizeGuide: "Size guide",
+    thePlace: "The place", close: "Close", colour: "Colour", size: "Size", sizeGuide: "Size guide",
     sizeFits: (h, w) => `Fits most people ${h} cm tall and ${w} kg.`,
     add: "Add to bag", added: (n) => `Added. You have ${n} in your bag.`, pickSize: "Pick a size first.",
     dFront: (cm) => `Front print, ${cm} cm wide`, dChest: (cm) => `Small chest print, ${cm} cm wide, on the left side`,
@@ -114,7 +114,7 @@ const T = {
     signupH: "รู้ก่อนเมื่อมีลายใหม่", signupP: "อีเมลสั้นๆ หนึ่งฉบับเมื่อมีลายใหม่ ไม่มีอย่างอื่น",
     emailPh: "อีเมลของคุณ", signupBtn: "สมัคร", signedUp: "สมัครเรียบร้อยแล้ว", signupFail: "สมัครไม่สำเร็จ ลองใหม่อีกครั้ง",
     footLine: "เสื้อลายเส้นที่วาดจากสถานที่จริงในเมืองไทย", footShop: "ร้านค้า", footHelp: "ช่วยเหลือ", footFaq: "คำถามและการคืนสินค้า", footPay: "ช่องทางชำระเงิน",
-    close: "ปิด", colour: "สี", size: "ไซซ์", sizeGuide: "ตารางไซซ์",
+    thePlace: "สถานที่", close: "ปิด", colour: "สี", size: "ไซซ์", sizeGuide: "ตารางไซซ์",
     sizeFits: (h, w) => `เหมาะกับคนสูง ${h} ซม. น้ำหนัก ${w} กก.`,
     add: "ใส่ตะกร้า", added: (n) => `เพิ่มแล้ว ตอนนี้มี ${n} ตัวในตะกร้า`, pickSize: "กรุณาเลือกไซซ์ก่อน",
     dFront: (cm) => `ลายหน้าอก กว้าง ${cm} ซม.`, dChest: (cm) => `ลายเล็กบนอกซ้าย กว้าง ${cm} ซม.`,
@@ -149,7 +149,7 @@ const L = (o, key = "name") => (lang === "th" ? o[key + "Th"] || o[key] : o[key]
 const design = (id) => shop.designs.find((d) => d.id === id);
 const colour = (id) => shop.colours.find((c) => c.id === id);
 const coll = (id) => shop.collections.find((c) => c.id === id);
-const backdrop = (d) => coll(d.collections[0]).backdrop;
+const backdrop = (d) => coll(d.collections.find((x) => coll(x).place !== false) || d.collections[0]).backdrop;
 const teeName = (d, c) => t("tee", L(d)) + (c ? t("teeColour", L(c)) : "");
 
 function totals() {
@@ -164,7 +164,7 @@ const printOf = (d, v) => (v === "chest" ? { widthCm: shop.chestLogoCm, placemen
 function shirt(d, cId, opts = {}) {
   const c = colour(cId), pr = printOf(d, opts.version || "front");
   return shirtSVG({
-    fabric: c.fabric, uid: `u${++uidN}`, backdrop: opts.backdrop || backdrop(d), view: opts.view || "flat",
+    fabric: c.fabric, heather: !!c.heather, uid: `u${++uidN}`, backdrop: opts.backdrop || backdrop(d), view: opts.view || "flat",
     title: teeName(d, c), print: { svg: prints[`${d.id}-${c.id}${pr.suffix}`], widthCm: pr.widthCm, placement: pr.placement },
   });
 }
@@ -203,8 +203,9 @@ function renderStatic() {
 
 function renderPlaces() {
   const reps = { north: "doi-inthanon", bangkok: "bangkok-1782", islands: "phang-nga-bay", wildlife: "similan-turtle" };
-  $("#places-menu").innerHTML = shop.collections.map((c) => `<li><a href="#shop" data-filter="${c.id}">${L(c)}<small>${L(c, "blurb")}</small></a></li>`).join("");
-  $("#place-grid").innerHTML = shop.collections.map((c) => `<li class="place-card"><a href="#shop" data-filter="${c.id}">
+  const places = shop.collections.filter((c) => c.place !== false);
+  $("#places-menu").innerHTML = places.map((c) => `<li><a href="#shop" data-filter="${c.id}">${L(c)}<small>${L(c, "blurb")}</small></a></li>`).join("");
+  $("#place-grid").innerHTML = places.map((c) => `<li class="place-card"><a href="#shop" data-filter="${c.id}">
       <div class="place-art" style="background:${c.backdrop}">${artInline(design(reps[c.id]))}</div>
       <div class="place-text"><h3>${L(c)}</h3><p>${L(c, "blurb")}</p></div></a></li>`).join("");
   $("#foot-places").innerHTML = shop.collections.map((c) => `<li><a href="#shop" data-filter="${c.id}">${L(c)}</a></li>`).join("");
@@ -341,6 +342,8 @@ function renderSheet() {
   $("#sheet-title").textContent = t("tee", L(d));
   $("#sheet-price").textContent = money(shop.pricePerTee);
   $("#sheet-blurb").textContent = L(d, "blurb");
+  $("#place-note").hidden = !d.place;
+  $("#place-text").textContent = d.place ? L(d, "place") : "";
   $("#colour-name").textContent = L(c);
   $("#sheet-colours").innerHTML = d.colours.map((x) => `<button type="button" class="dot" style="background:${colour(x).fabric}" data-pick-colour="${x}" aria-pressed="${x === c.id}" aria-label="${L(colour(x))}" title="${L(colour(x))}"></button>`).join("");
   $("#sheet-sizes").innerHTML = shop.sizes.map((s) => `<button type="button" data-pick-size="${s.id}" aria-pressed="${s.id === sel.size}">${s.id}</button>`).join("");

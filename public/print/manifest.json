@@ -25,6 +25,234 @@
       }
     }
   },
+  "rama-viii-bridge": {
+    "white": {
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "black": {
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "indigo": {
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    }
+  },
+  "ko-tapu": {
+    "black": {
+      "front": {
+        "widthCm": 24,
+        "widthPx300": 2835,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "white": {
+      "front": {
+        "widthCm": 24,
+        "widthPx300": 2835,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "sage": {
+      "front": {
+        "widthCm": 24,
+        "widthPx300": 2835,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    }
+  },
+  "whale-shark": {
+    "white": {
+      "front": {
+        "widthCm": 28,
+        "widthPx300": 3308,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "indigo": {
+      "front": {
+        "widthCm": 28,
+        "widthPx300": 3308,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "black": {
+      "front": {
+        "widthCm": 28,
+        "widthPx300": 3308,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    }
+  },
+  "cha-yen": {
+    "white": {
+      "front": {
+        "widthCm": 20,
+        "widthPx300": 2363,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "oat": {
+      "front": {
+        "widthCm": 20,
+        "widthPx300": 2363,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "black": {
+      "front": {
+        "widthCm": 20,
+        "widthPx300": 2363,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    }
+  },
+  "jai-yen-yen": {
+    "black": {
+      "front": {
+        "widthCm": 24,
+        "widthPx300": 2835,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "white": {
+      "front": {
+        "widthCm": 24,
+        "widthPx300": 2835,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "indigo": {
+      "front": {
+        "widthCm": 24,
+        "widthPx300": 2835,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    }
+  },
+  "doi-luang-chiang-dao": {
+    "white": {
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "sage": {
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    },
+    "black": {
+      "front": {
+        "widthCm": 26,
+        "widthPx300": 3071,
+        "placement": "front"
+      },
+      "chest": {
+        "widthCm": 4,
+        "widthPx300": 473,
+        "placement": "chest"
+      }
+    }
+  },
   "doi-inthanon": {
     "black": {
       "front": {
