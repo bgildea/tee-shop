@@ -168,7 +168,7 @@ section { scroll-margin-top: 5rem; }
 
 /* Pillars */
 .pillars { margin-top: clamp(4rem, 8vw, 6rem); background: var(--forest); color: var(--cream); }
-.pillars ul { max-width: var(--wrap); margin: 0 auto; padding: clamp(2.5rem, 6vw, 4rem) var(--gut); display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.pillars ul { max-width: var(--wrap); margin: 0 auto; padding: clamp(2.5rem, 6vw, 4rem) var(--gut); display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 4rem; }
 .pillars svg { width: 52px; height: 52px; color: var(--cream); margin-bottom: 1rem; }
 .pillars h3 { font-size: 1.5rem; margin-bottom: .5rem; }
 .pillars p { color: #D9D3C4; max-width: 34ch; }
