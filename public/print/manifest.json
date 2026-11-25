@@ -1,108 +1,86 @@
 {
   "doi-inthanon": {
     "black": {
-      "widthCm": 25,
-      "widthPx300": 2953,
+      "widthCm": 26,
+      "widthPx300": 3071,
       "placement": "front"
     },
     "forest": {
-      "widthCm": 25,
-      "widthPx300": 2953,
+      "widthCm": 26,
+      "widthPx300": 3071,
       "placement": "front"
     },
     "white": {
-      "widthCm": 25,
-      "widthPx300": 2953,
+      "widthCm": 26,
+      "widthPx300": 3071,
       "placement": "front"
     }
   },
-  "railay": {
-    "black": {
-      "widthCm": 25,
-      "widthPx300": 2953,
+  "phang-nga-bay": {
+    "white": {
+      "widthCm": 26,
+      "widthPx300": 3071,
       "placement": "front"
     },
-    "white": {
-      "widthCm": 25,
-      "widthPx300": 2953,
+    "black": {
+      "widthCm": 26,
+      "widthPx300": 3071,
       "placement": "front"
     },
     "sand": {
-      "widthCm": 25,
-      "widthPx300": 2953,
+      "widthCm": 26,
+      "widthPx300": 3071,
       "placement": "front"
     }
   },
-  "khao-yai-hornbill": {
+  "bangkok-1782": {
     "black": {
-      "widthCm": 25,
-      "widthPx300": 2953,
+      "widthCm": 28,
+      "widthPx300": 3308,
+      "placement": "front"
+    },
+    "white": {
+      "widthCm": 28,
+      "widthPx300": 3308,
+      "placement": "front"
+    }
+  },
+  "tukkae-night-shift": {
+    "black": {
+      "widthCm": 26,
+      "widthPx300": 3071,
       "placement": "front"
     },
     "forest": {
-      "widthCm": 25,
-      "widthPx300": 2953,
+      "widthCm": 26,
+      "widthPx300": 3071,
       "placement": "front"
     }
   },
   "similan-turtle": {
     "white": {
-      "widthCm": 25,
-      "widthPx300": 2953,
+      "widthCm": 26,
+      "widthPx300": 3071,
       "placement": "front"
     },
     "black": {
-      "widthCm": 25,
-      "widthPx300": 2953,
+      "widthCm": 26,
+      "widthPx300": 3071,
       "placement": "front"
     },
     "sand": {
-      "widthCm": 25,
-      "widthPx300": 2953,
+      "widthCm": 26,
+      "widthPx300": 3071,
       "placement": "front"
     }
   },
-  "lumpini-lizard": {
-    "white": {
-      "widthCm": 27,
-      "widthPx300": 3189,
-      "placement": "front"
-    },
+  "monsoon-club": {
     "black": {
       "widthCm": 27,
       "widthPx300": 3189,
       "placement": "front"
     },
-    "sand": {
-      "widthCm": 27,
-      "widthPx300": 3189,
-      "placement": "front"
-    }
-  },
-  "bangkok-skyline": {
-    "black": {
-      "widthCm": 28,
-      "widthPx300": 3308,
-      "placement": "front"
-    },
     "white": {
-      "widthCm": 28,
-      "widthPx300": 3308,
-      "placement": "front"
-    }
-  },
-  "longtail": {
-    "white": {
-      "widthCm": 27,
-      "widthPx300": 3189,
-      "placement": "front"
-    },
-    "black": {
-      "widthCm": 27,
-      "widthPx300": 3189,
-      "placement": "front"
-    },
-    "sand": {
       "widthCm": 27,
       "widthPx300": 3189,
       "placement": "front"

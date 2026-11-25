@@ -21,4 +21,14 @@ Type: Oswald for headings and artwork lettering, Bai Jamjuree for body text and 
 
 ## Artwork
 
-`tools/designs.mjs` holds every design as code: round badges (Doi Inthanon, Railay, Khao Yai, Similan) and open layouts (Lumpini Lizard, Bangkok Skyline, Andaman Longtail, Soi Dog). Two inks per design: a main ink that flips between cream and black with the shirt, plus marigold.
+`tools/designs.mjs` holds every design as code. The current range (25 Nov 2026, second pass):
+
+- Doi Inthanon: arch-framed poster, three ridgelines (hatched, stippled, solid with a pine line), striped sun, knocked-out altitude pill
+- Phang Nga Bay: round badge, karst towers with hatching and stipple, perspective water, longtail, ribbon title with knocked-out lettering
+- Bangkok 1782: temple prang over a sunburst, shadowed BANGKOK lettering, กรุงเทพมหานคร
+- Tukkae Night Shift: spotted tokay gecko under a crescent moon, script lettering
+- Similan Turtle: turtle with cut-out shell plates inside a scalloped wave ring
+- Monsoon Club: storm cloud, lightning and rain with shadowed type and script
+- Soi Dog: small chest print
+
+Techniques: procedural ridges, hatching and stipple (seeded, so output is repeatable), SVG masks for knockouts so the shirt shows through, two inks per design (main ink flips between cream and black with the shirt, plus marigold).

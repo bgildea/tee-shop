@@ -96,7 +96,7 @@
       "id": "doi-inthanon",
       "name": "Doi Inthanon",
       "nameTh": "ดอยอินทนนท์",
-      "widthCm": 25,
+      "widthCm": 26,
       "placement": "front",
       "colours": [
         "black",
@@ -106,55 +106,74 @@
       "collections": [
         "north"
       ],
-      "blurb": "Thailand's highest peak at 2,565 m, pines on the ridge and the sun coming up over Chiang Mai.",
-      "blurbTh": "ยอดเขาที่สูงที่สุดในไทย 2,565 เมตร ทิวสนบนสันเขาและพระอาทิตย์ขึ้นเหนือเชียงใหม่",
+      "blurb": "Thailand's highest peak at 2,565 m: three ridgelines, a pine forest and the sun coming up over Chiang Mai.",
+      "blurbTh": "ยอดเขาที่สูงที่สุดในไทย 2,565 เมตร สันเขาสามชั้น ป่าสน และพระอาทิตย์ขึ้นเหนือเชียงใหม่",
       "badge": "best",
       "story": "Cold air, a hot coffee and the whole of the north below you. This one is for anyone who has stood at the top in a borrowed jacket.",
       "storyTh": "อากาศหนาว กาแฟร้อน และภาคเหนือทั้งหมดอยู่ใต้เท้า ตัวนี้สำหรับทุกคนที่เคยยืนบนยอดดอยในเสื้อกันหนาวที่ยืมเพื่อนมา"
     },
     {
-      "id": "railay",
-      "name": "Railay Beach",
-      "nameTh": "ไร่เลย์",
-      "widthCm": 25,
+      "id": "phang-nga-bay",
+      "name": "Phang Nga Bay",
+      "nameTh": "อ่าวพังงา",
+      "widthCm": 26,
       "placement": "front",
       "colours": [
-        "black",
         "white",
+        "black",
         "sand"
       ],
       "collections": [
         "islands"
       ],
-      "blurb": "Limestone towers, a longtail heading home and three lines of Andaman sea.",
-      "blurbTh": "ภูเขาหินปูน เรือหางยาวกำลังกลับฝั่ง และคลื่นทะเลอันดามันสามแนว",
+      "blurb": "Limestone towers straight out of the Andaman Sea, a longtail heading home and the bay's name on a ribbon.",
+      "blurbTh": "เขาหินปูนตั้งตระหง่านกลางทะเลอันดามัน เรือหางยาวกำลังกลับฝั่ง และชื่ออ่าวบนริบบิ้น",
       "badge": "best",
-      "story": "You can only get there by boat, which is half the point. We drew the cliffs the way they look from the water at five o'clock.",
-      "storyTh": "ไปได้ทางเรือเท่านั้น ซึ่งก็คือเสน่ห์ครึ่งหนึ่ง เราวาดหน้าผาตามที่เห็นจากในน้ำตอนห้าโมงเย็น"
+      "story": "Hundreds of limestone towers stand straight out of the water here. We drew them at the hour the longtails head home.",
+      "storyTh": "เขาหินปูนนับร้อยลูกโผล่ขึ้นมาจากน้ำ เราวาดมันในช่วงเวลาที่เรือหางยาวกำลังกลับฝั่ง"
     },
     {
-      "id": "khao-yai-hornbill",
-      "name": "Khao Yai Hornbill",
-      "nameTh": "นกเงือกเขาใหญ่",
-      "widthCm": 25,
+      "id": "bangkok-1782",
+      "name": "Bangkok 1782",
+      "nameTh": "กรุงเทพฯ 1782",
+      "widthCm": 28,
+      "placement": "front",
+      "colours": [
+        "black",
+        "white"
+      ],
+      "collections": [
+        "bangkok"
+      ],
+      "blurb": "A temple prang against a sunburst over the Chao Phraya, with the city's founding year and its full Thai name.",
+      "blurbTh": "พระปรางค์ตัดกับแสงอาทิตย์เหนือแม่น้ำเจ้าพระยา พร้อมปีที่ก่อตั้งเมืองและชื่อกรุงเทพมหานคร",
+      "badge": "best"
+    },
+    {
+      "id": "tukkae-night-shift",
+      "name": "Tukkae Night Shift",
+      "nameTh": "ตุ๊กแกกะดึก",
+      "widthCm": 26,
       "placement": "front",
       "colours": [
         "black",
         "forest"
       ],
       "collections": [
-        "wildlife",
-        "north"
+        "bangkok",
+        "wildlife"
       ],
-      "blurb": "A great hornbill on a branch in Thailand's first national park.",
-      "blurbTh": "นกกกบนกิ่งไม้ในอุทยานแห่งชาติแห่งแรกของไทย",
-      "badge": "new"
+      "blurb": "A spotted tokay gecko under a crescent moon, for everyone who hears one calling at 2am.",
+      "blurbTh": "ตุ๊กแกลายจุดใต้พระจันทร์เสี้ยว สำหรับทุกคนที่เคยได้ยินเสียงร้องตอนตีสอง",
+      "badge": "new",
+      "story": "If you've lived in Bangkok you've heard one: tuk-kae, tuk-kae, right outside the window at 2am. This one is for everyone on the night shift with them.",
+      "storyTh": "ถ้าเคยอยู่กรุงเทพฯ ต้องเคยได้ยิน ตุ๊กแก ตุ๊กแก ข้างหน้าต่างตอนตีสอง ตัวนี้สำหรับทุกคนที่อยู่กะดึกด้วยกันกับมัน"
     },
     {
       "id": "similan-turtle",
       "name": "Similan Turtle",
       "nameTh": "เต่าสิมิลัน",
-      "widthCm": 25,
+      "widthCm": 26,
       "placement": "front",
       "colours": [
         "white",
@@ -165,35 +184,14 @@
         "islands",
         "wildlife"
       ],
-      "blurb": "A sea turtle surfacing off the Similan Islands, drawn from above.",
-      "blurbTh": "เต่าทะเลโผล่ขึ้นมาหายใจที่หมู่เกาะสิมิลัน มองจากด้านบน"
+      "blurb": "A green turtle swimming through a ring of waves off the Similan Islands.",
+      "blurbTh": "เต่าทะเลว่ายผ่านวงคลื่นที่หมู่เกาะสิมิลัน"
     },
     {
-      "id": "lumpini-lizard",
-      "name": "Lumpini Lizard Club",
-      "nameTh": "ชมรมตัวเงินตัวทองลุมพินี",
+      "id": "monsoon-club",
+      "name": "Monsoon Club",
+      "nameTh": "ชมรมหน้าฝน",
       "widthCm": 27,
-      "placement": "front",
-      "colours": [
-        "white",
-        "black",
-        "sand"
-      ],
-      "collections": [
-        "bangkok",
-        "wildlife"
-      ],
-      "blurb": "For everyone who has jogged round Lumpini and met a two-metre monitor lizard on the path.",
-      "blurbTh": "สำหรับทุกคนที่เคยวิ่งในสวนลุมแล้วเจอตัวเงินตัวทองยาวสองเมตรขวางทาง",
-      "badge": "new",
-      "story": "Lumpini's monitor lizards are the calmest residents in Bangkok. They own the park and they know it.",
-      "storyTh": "ตัวเงินตัวทองในสวนลุมคือผู้อยู่อาศัยที่ใจเย็นที่สุดในกรุงเทพฯ พวกเขาเป็นเจ้าของสวนและรู้ตัวดี"
-    },
-    {
-      "id": "bangkok-skyline",
-      "name": "Bangkok Skyline",
-      "nameTh": "เส้นขอบฟ้ากรุงเทพฯ",
-      "widthCm": 28,
       "placement": "front",
       "colours": [
         "black",
@@ -202,26 +200,9 @@
       "collections": [
         "bangkok"
       ],
-      "blurb": "Temple spires, towers and the Chao Phraya, with กรุงเทพฯ underneath.",
-      "blurbTh": "ยอดพระปรางค์ ตึกสูง และแม่น้ำเจ้าพระยา พร้อมคำว่ากรุงเทพฯ",
-      "badge": "best"
-    },
-    {
-      "id": "longtail",
-      "name": "Andaman Longtail",
-      "nameTh": "เรือหางยาวอันดามัน",
-      "widthCm": 27,
-      "placement": "front",
-      "colours": [
-        "white",
-        "black",
-        "sand"
-      ],
-      "collections": [
-        "islands"
-      ],
-      "blurb": "A longtail boat with garlands on the bow, out on the Andaman sea.",
-      "blurbTh": "เรือหางยาวผูกพวงมาลัยที่หัวเรือ ล่องบนทะเลอันดามัน"
+      "blurb": "Storm cloud, lightning and rain, for members from May to October and, honestly, forever.",
+      "blurbTh": "เมฆฝน ฟ้าแลบ และสายฝน สำหรับสมาชิกตั้งแต่พฤษภาถึงตุลา และจริงๆ ก็ตลอดไป",
+      "badge": "new"
     },
     {
       "id": "soi-dog",
@@ -264,16 +245,16 @@
       "id": "islands",
       "name": "The Islands",
       "nameTh": "ทะเลและเกาะ",
-      "blurb": "Limestone, longtails and clear water.",
-      "blurbTh": "หินปูน เรือหางยาว และน้ำใส",
+      "blurb": "Limestone, longtails and turtles.",
+      "blurbTh": "หินปูน เรือหางยาว และเต่าทะเล",
       "backdrop": "#CADBDC"
     },
     {
       "id": "wildlife",
       "name": "Wildlife",
       "nameTh": "สัตว์ป่า",
-      "blurb": "Hornbills, monitors and the odd soi dog.",
-      "blurbTh": "นกเงือก ตัวเงินตัวทอง และหมาซอย",
+      "blurb": "Geckos, turtles and the odd soi dog.",
+      "blurbTh": "ตุ๊กแก เต่าทะเล และหมาซอย",
       "backdrop": "#DDD8C2"
     }
   ],

@@ -35,7 +35,7 @@ export function shirtSVG({ fabric, print, uid = "s", view = "flat", backdrop = "
     const vb = print.svg.match(/viewBox="([^"]+)"/)[1].split(/\s+/).map(Number);
     box = printBox(print.placement, print.widthCm, vb[3] / vb[2]);
     const inner = print.svg.replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "")
-      .replace(/id="clip-/g, `id="clip-${uid}-`).replace(/url\(#clip-/g, `url(#clip-${uid}-`);
+      .replace(/id="([^"]+)"/g, `id="${uid}-$1"`).replace(/url\(#([^)]+)\)/g, `url(#${uid}-$1)`);
     printMarkup = `<svg x="${box.x}" y="${box.y}" width="${box.w}" height="${box.h}" viewBox="${vb.join(" ")}" overflow="visible"><g opacity="${light ? 0.94 : 0.92}">${inner}</g></svg>`;
   }
 

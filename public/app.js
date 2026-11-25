@@ -160,7 +160,7 @@ function shirt(d, cId, opts = {}) {
 const lightColour = (d) => d.colours.find((c) => ["white", "sand"].includes(c)) || d.colours[0];
 const artInline = (d) => {
   const svg = prints[`${d.id}-${lightColour(d)}`];
-  return svg.replace(/width="[^"]+" height="[^"]+"/, "").replace(/id="clip-/g, `id="clip-a${++uidN}-`).replace(/url\(#clip-/g, `url(#clip-a${uidN}-`);
+  return svg.replace(/width="[^"]+" height="[^"]+"/, "").replace(/id="([^"]+)"/g, `id="a${++uidN}-$1"`).replace(/url\(#([^)]+)\)/g, `url(#a${uidN}-$1)`);
 };
 
 /* ---------- Rendering ---------- */
@@ -191,7 +191,7 @@ function renderStatic() {
 }
 
 function renderPlaces() {
-  const reps = { north: "doi-inthanon", bangkok: "bangkok-skyline", islands: "railay", wildlife: "similan-turtle" };
+  const reps = { north: "doi-inthanon", bangkok: "bangkok-1782", islands: "phang-nga-bay", wildlife: "similan-turtle" };
   $("#places-menu").innerHTML = shop.collections.map((c) => `<li><a href="#shop" data-filter="${c.id}">${L(c)}<small>${L(c, "blurb")}</small></a></li>`).join("");
   $("#place-grid").innerHTML = shop.collections.map((c) => `<li class="place-card"><a href="#shop" data-filter="${c.id}">
       <div class="place-art" style="background:${c.backdrop}">${artInline(design(reps[c.id]))}</div>
@@ -289,7 +289,7 @@ function scaleSVG(d) {
   const vb = art.match(/viewBox="([^"]+)"/)[1].split(" ").map(Number);
   const pw = d.widthCm * k, ph = pw * (vb[3] / vb[2]);
   const len = Math.ceil(d.widthCm) + 2, x0 = 10, top = ph + 14, w = len * k;
-  const inner = art.replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "").replace(/id="clip-/g, `id="clip-s${++uidN}-`).replace(/url\(#clip-/g, `url(#clip-s${uidN}-`);
+  const inner = art.replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "").replace(/id="([^"]+)"/g, `id="s${++uidN}-$1"`).replace(/url\(#([^)]+)\)/g, `url(#s${uidN}-$1)`);
   let ticks = "", nums = "";
   const step = d.widthCm > 12 ? 5 : 1;
   for (let mm = 0; mm <= len * 10; mm++) {
