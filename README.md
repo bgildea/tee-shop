@@ -10,9 +10,9 @@ Pre-launch. Prices are placeholders (`pricesConfirmed: false` shows a preview ba
 
 ## Layout
 
-- `public/` the site: `index.html`, `styles.css`, `app.js`, `shop.json`, `js/shirt.js` (draws the chest mockups), `fonts/` (Bai Jamjuree, Latin and Thai, self-hosted)
+- `public/` the site: `index.html`, `styles.css`, `app.js`, `shop.json`, `js/shirt.js` (draws the flat-lay tee mockups), `img/hero.svg`, `fonts/` (Oswald and Bai Jamjuree, self-hosted)
 - `public/print/` print files per design and shirt colour: outlined SVG and 300 dpi transparent PNG, plus `manifest.json`
-- `public/mockups/` 1800 x 1350 chest proof JPGs (used in emails)
+- `public/mockups/` 1600 x 1600 flat-lay proof JPGs (used in emails)
 - `netlify/functions/submission-created.mjs` emails the customer (EN or TH) with proofs and a PromptPay QR, and emails you the print files
 - `netlify/functions/promptpay-qr.mjs` serves `/qr/promptpay/<amount>.png`
 - `netlify/lib/` PromptPay payload and order checking (the server recalculates totals from `shop.json`)
@@ -46,6 +46,6 @@ Order numbers look like `TD-YYMMDD-XXXX` (Bangkok date). Netlify's own form noti
 
 ## Adding a design
 
-1. Draw it in `tools/designs.mjs` (millimetres, use `INK` and `ACCENT` as colours).
-2. Add it to `designs` in `public/shop.json` with its print width.
+1. Draw it in `tools/designs.mjs` (a box about 200 units wide, use `INK` and `ACCENT` as colours).
+2. Add it to `designs` in `public/shop.json` with its print width, placement (`front` or `chest`), shirt colours and collections.
 3. Run `npm run designs` and commit the generated files.

@@ -15,27 +15,44 @@
     {
       "id": "S",
       "chest": 46,
-      "length": 69
+      "length": 69,
+      "height": "155–165",
+      "weight": "45–55"
     },
     {
       "id": "M",
       "chest": 51,
-      "length": 73
+      "length": 73,
+      "height": "160–172",
+      "weight": "55–65"
     },
     {
       "id": "L",
       "chest": 54,
-      "length": 75
+      "length": 75,
+      "height": "168–178",
+      "weight": "65–75"
     },
     {
       "id": "XL",
       "chest": 57,
-      "length": 77
+      "length": 77,
+      "height": "172–182",
+      "weight": "75–85"
     },
     {
       "id": "2XL",
       "chest": 60,
-      "length": 79
+      "length": 79,
+      "height": "175–185",
+      "weight": "85–95"
+    },
+    {
+      "id": "3XL",
+      "chest": 63,
+      "length": 81,
+      "height": "178–190",
+      "weight": "95–110"
     }
   ],
   "sizeNote": "Typical values for a 100% cotton tee, measured flat. To be replaced with the print partner's real blank.",
@@ -44,43 +61,221 @@
       "id": "black",
       "name": "Black",
       "nameTh": "ดำ",
-      "fabric": "#1C1C1E",
-      "ink": "#F3F1EA"
+      "fabric": "#1F1F21",
+      "ink": "#F1EBDD",
+      "accent": "#EDB024"
     },
     {
       "id": "white",
       "name": "White",
       "nameTh": "ขาว",
-      "fabric": "#F5F5F2",
-      "ink": "#1F2A44"
+      "fabric": "#F4F3EF",
+      "ink": "#1E1E1F",
+      "accent": "#E3A41C"
+    },
+    {
+      "id": "forest",
+      "name": "Forest",
+      "nameTh": "เขียวป่า",
+      "fabric": "#2E4537",
+      "ink": "#F1EBDD",
+      "accent": "#EDB024"
+    },
+    {
+      "id": "sand",
+      "name": "Sand",
+      "nameTh": "สีทราย",
+      "fabric": "#D8CCB2",
+      "ink": "#1E1E1F",
+      "accent": "#B5541F"
     }
   ],
   "accent": "#F2B517",
   "designs": [
     {
-      "id": "bangkok-coordinates",
-      "name": "Bangkok coordinates",
-      "nameTh": "พิกัดกรุงเทพ",
-      "blurb": "13.75° N, 100.50° E. For people who know exactly where they are.",
-      "blurbTh": "13.75° N, 100.50° E สำหรับคนที่รู้ว่าตัวเองอยู่ตรงไหน",
-      "widthCm": 6
+      "id": "doi-inthanon",
+      "name": "Doi Inthanon",
+      "nameTh": "ดอยอินทนนท์",
+      "widthCm": 25,
+      "placement": "front",
+      "colours": [
+        "black",
+        "forest",
+        "white"
+      ],
+      "collections": [
+        "north"
+      ],
+      "blurb": "Thailand's highest peak at 2,565 m, pines on the ridge and the sun coming up over Chiang Mai.",
+      "blurbTh": "ยอดเขาที่สูงที่สุดในไทย 2,565 เมตร ทิวสนบนสันเขาและพระอาทิตย์ขึ้นเหนือเชียงใหม่",
+      "badge": "best",
+      "story": "Cold air, a hot coffee and the whole of the north below you. This one is for anyone who has stood at the top in a borrowed jacket.",
+      "storyTh": "อากาศหนาว กาแฟร้อน และภาคเหนือทั้งหมดอยู่ใต้เท้า ตัวนี้สำหรับทุกคนที่เคยยืนบนยอดดอยในเสื้อกันหนาวที่ยืมเพื่อนมา"
     },
     {
-      "id": "mango-sticky-rice",
-      "name": "Mango sticky rice",
-      "nameTh": "ข้าวเหนียวมะม่วง",
-      "blurb": "Half a mango and a scoop of rice. The best thing to happen in April.",
-      "blurbTh": "มะม่วงครึ่งลูกกับข้าวเหนียวหนึ่งก้อน สิ่งที่ดีที่สุดของเดือนเมษา",
-      "widthCm": 6
+      "id": "railay",
+      "name": "Railay Beach",
+      "nameTh": "ไร่เลย์",
+      "widthCm": 25,
+      "placement": "front",
+      "colours": [
+        "black",
+        "white",
+        "sand"
+      ],
+      "collections": [
+        "islands"
+      ],
+      "blurb": "Limestone towers, a longtail heading home and three lines of Andaman sea.",
+      "blurbTh": "ภูเขาหินปูน เรือหางยาวกำลังกลับฝั่ง และคลื่นทะเลอันดามันสามแนว",
+      "badge": "best",
+      "story": "You can only get there by boat, which is half the point. We drew the cliffs the way they look from the water at five o'clock.",
+      "storyTh": "ไปได้ทางเรือเท่านั้น ซึ่งก็คือเสน่ห์ครึ่งหนึ่ง เราวาดหน้าผาตามที่เห็นจากในน้ำตอนห้าโมงเย็น"
     },
     {
-      "id": "fon",
-      "name": "Rain",
-      "nameTh": "ฝน",
-      "blurb": "The Thai word for rain over three lines of it. Wear it from June to October, or whenever.",
-      "blurbTh": "คำว่าฝนกับสายฝนสามเส้น ใส่ได้ตั้งแต่มิถุนาถึงตุลา หรือเมื่อไหร่ก็ได้",
-      "widthCm": 4.5
+      "id": "khao-yai-hornbill",
+      "name": "Khao Yai Hornbill",
+      "nameTh": "นกเงือกเขาใหญ่",
+      "widthCm": 25,
+      "placement": "front",
+      "colours": [
+        "black",
+        "forest"
+      ],
+      "collections": [
+        "wildlife",
+        "north"
+      ],
+      "blurb": "A great hornbill on a branch in Thailand's first national park.",
+      "blurbTh": "นกกกบนกิ่งไม้ในอุทยานแห่งชาติแห่งแรกของไทย",
+      "badge": "new"
+    },
+    {
+      "id": "similan-turtle",
+      "name": "Similan Turtle",
+      "nameTh": "เต่าสิมิลัน",
+      "widthCm": 25,
+      "placement": "front",
+      "colours": [
+        "white",
+        "black",
+        "sand"
+      ],
+      "collections": [
+        "islands",
+        "wildlife"
+      ],
+      "blurb": "A sea turtle surfacing off the Similan Islands, drawn from above.",
+      "blurbTh": "เต่าทะเลโผล่ขึ้นมาหายใจที่หมู่เกาะสิมิลัน มองจากด้านบน"
+    },
+    {
+      "id": "lumpini-lizard",
+      "name": "Lumpini Lizard Club",
+      "nameTh": "ชมรมตัวเงินตัวทองลุมพินี",
+      "widthCm": 27,
+      "placement": "front",
+      "colours": [
+        "white",
+        "black",
+        "sand"
+      ],
+      "collections": [
+        "bangkok",
+        "wildlife"
+      ],
+      "blurb": "For everyone who has jogged round Lumpini and met a two-metre monitor lizard on the path.",
+      "blurbTh": "สำหรับทุกคนที่เคยวิ่งในสวนลุมแล้วเจอตัวเงินตัวทองยาวสองเมตรขวางทาง",
+      "badge": "new",
+      "story": "Lumpini's monitor lizards are the calmest residents in Bangkok. They own the park and they know it.",
+      "storyTh": "ตัวเงินตัวทองในสวนลุมคือผู้อยู่อาศัยที่ใจเย็นที่สุดในกรุงเทพฯ พวกเขาเป็นเจ้าของสวนและรู้ตัวดี"
+    },
+    {
+      "id": "bangkok-skyline",
+      "name": "Bangkok Skyline",
+      "nameTh": "เส้นขอบฟ้ากรุงเทพฯ",
+      "widthCm": 28,
+      "placement": "front",
+      "colours": [
+        "black",
+        "white"
+      ],
+      "collections": [
+        "bangkok"
+      ],
+      "blurb": "Temple spires, towers and the Chao Phraya, with กรุงเทพฯ underneath.",
+      "blurbTh": "ยอดพระปรางค์ ตึกสูง และแม่น้ำเจ้าพระยา พร้อมคำว่ากรุงเทพฯ",
+      "badge": "best"
+    },
+    {
+      "id": "longtail",
+      "name": "Andaman Longtail",
+      "nameTh": "เรือหางยาวอันดามัน",
+      "widthCm": 27,
+      "placement": "front",
+      "colours": [
+        "white",
+        "black",
+        "sand"
+      ],
+      "collections": [
+        "islands"
+      ],
+      "blurb": "A longtail boat with garlands on the bow, out on the Andaman sea.",
+      "blurbTh": "เรือหางยาวผูกพวงมาลัยที่หัวเรือ ล่องบนทะเลอันดามัน"
+    },
+    {
+      "id": "soi-dog",
+      "name": "Soi Dog",
+      "nameTh": "หมาซอย",
+      "widthCm": 9,
+      "placement": "chest",
+      "colours": [
+        "white",
+        "black"
+      ],
+      "collections": [
+        "bangkok",
+        "wildlife"
+      ],
+      "blurb": "A small chest print of a soi dog doing what soi dogs do best.",
+      "blurbTh": "ลายเล็กบนอก หมาซอยกำลังทำสิ่งที่ถนัดที่สุด",
+      "badge": "new"
     }
   ],
-  "promptPayId": "004999038380795"
+  "promptPayId": "004999038380795",
+  "collections": [
+    {
+      "id": "north",
+      "name": "The North",
+      "nameTh": "ภาคเหนือ",
+      "blurb": "Mountains, mist and pine.",
+      "blurbTh": "ภูเขา หมอก และสน",
+      "backdrop": "#D5DCCC"
+    },
+    {
+      "id": "bangkok",
+      "name": "Bangkok",
+      "nameTh": "กรุงเทพฯ",
+      "blurb": "The city, the river, the locals.",
+      "blurbTh": "เมือง แม่น้ำ และชาวบ้าน",
+      "backdrop": "#E6D5C8"
+    },
+    {
+      "id": "islands",
+      "name": "The Islands",
+      "nameTh": "ทะเลและเกาะ",
+      "blurb": "Limestone, longtails and clear water.",
+      "blurbTh": "หินปูน เรือหางยาว และน้ำใส",
+      "backdrop": "#CADBDC"
+    },
+    {
+      "id": "wildlife",
+      "name": "Wildlife",
+      "nameTh": "สัตว์ป่า",
+      "blurb": "Hornbills, monitors and the odd soi dog.",
+      "blurbTh": "นกเงือก ตัวเงินตัวทอง และหมาซอย",
+      "backdrop": "#DDD8C2"
+    }
+  ],
+  "tagline": "Drawn from real places in Thailand."
 }

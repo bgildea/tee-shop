@@ -14,7 +14,7 @@ export function checkOrder(data) {
     const colour = shop.colours.find((c) => c.id === it.colour);
     const size = shop.sizes.find((s) => s.id === it.size);
     const qty = Math.max(0, Math.min(50, parseInt(it.qty, 10) || 0));
-    if (design && colour && size && qty) lines.push({ design, colour, size: size.id, qty });
+    if (design && colour && size && qty && (!design.colours || design.colours.includes(colour.id))) lines.push({ design, colour, size: size.id, qty });
   }
   const qty = lines.reduce((s, l) => s + l.qty, 0);
   const subtotal = qty * shop.pricePerTee;

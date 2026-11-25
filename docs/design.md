@@ -1,19 +1,24 @@
 # Design notes
 
-## Idea
+## Direction (25 Nov 2026)
 
-The shop sells small left-chest prints, so the site is built around showing real size. The hero is a black chest crop with the print width marked. Every product sheet shows the print against a centimetre ruler at the same scale.
+Modelled on Due South (place-based, hand-drawn line art, single light ink on dark shirts) and West Coast Tees (playful local animals, "hot off the press" feature). Every design is a real place or creature in Thailand.
 
 ## Tokens
 
-- Cotton `#EEEFEA` page
-- Stone `#DADCD7` photo backdrop
-- Ink `#1F2A44` text and print ink on white shirts
-- Marigold `#F2B517` the accent dot, used sparingly
-- Thread `#5B6273` secondary text
+- Cream `#F4F0E8` page, Paper `#FBF9F4` panels
+- Ink `#1E1E1F` text
+- Forest `#2E4537` hero and pillars band
+- Marigold `#EDB024` second ink colour and accents
+- Clay `#B5541F` "New" badges and step numbers
+- Collection backdrops behind product shots: North `#D5DCCC`, Bangkok `#E6D5C8`, Islands `#CADBDC`, Wildlife `#DDD8C2`
 
-Type: Bai Jamjuree (Cadson Demak) for everything, Latin and Thai from one family, weights 400 to 700.
+Type: Oswald for headings and artwork lettering, Bai Jamjuree for body text and all Thai (Kanit for Thai lettering inside artwork).
 
 ## Mockups
 
-`public/js/shirt.js` draws the shirt in SVG at 48 px per cm, so tiles, the hero, the product sheet and the email proofs all use the same geometry. The print sits 9.5 cm from centre on the wearer's left, which is the viewer's right.
+`public/js/shirt.js` draws a flat-lay tee in SVG at 10 units per cm (size M, 51 cm chest). Front prints sit centred 8 cm under the collar; chest prints sit on the wearer's left. Cards show the whole tee and swap to a close-up of the print on hover.
+
+## Artwork
+
+`tools/designs.mjs` holds every design as code: round badges (Doi Inthanon, Railay, Khao Yai, Similan) and open layouts (Lumpini Lizard, Bangkok Skyline, Andaman Longtail, Soi Dog). Two inks per design: a main ink that flips between cream and black with the shirt, plus marigold.

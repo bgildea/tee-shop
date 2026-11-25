@@ -3,101 +3,134 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tee Shop: small chest-print T-shirts, printed in Thailand</title>
-  <meta name="description" content="Small left-chest prints on 100% cotton tees. Printed to order in Thailand, paid by PromptPay.">
-  <link rel="preload" href="/fonts/bai-jamjuree-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Tee Shop: T-shirts drawn from real places in Thailand</title>
+  <meta name="description" content="Line-art T-shirts of Thai mountains, islands, Bangkok and wildlife. 100% cotton, printed to order in Thailand, paid by PromptPay.">
+  <link rel="preload" href="/fonts/oswald-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body>
   <a class="skip" href="#shop" data-i18n="skip">Skip to the tees</a>
 
+  <div class="announce" aria-live="polite">
+    <p id="announce"></p>
+  </div>
   <p class="preview" id="preview" hidden data-i18n="preview">Preview shop. Prices are placeholders and orders are not live yet.</p>
 
   <header class="top">
-    <a class="brand" href="/" aria-label="Home">
-      <svg viewBox="0 0 45 45" aria-hidden="true"><circle cx="22.5" cy="22.5" r="21" fill="var(--marigold)"/></svg>
-      <span data-brand>Tee Shop</span>
-    </a>
-    <nav class="top-nav" aria-label="Main">
-      <a href="#shop" data-i18n="navShop">Tees</a>
-      <a href="#sizes" data-i18n="navSizes">Sizes</a>
-      <a href="#faq" data-i18n="navHelp">Help</a>
-    </nav>
-    <div class="top-actions">
-      <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-lang="en" aria-pressed="true">EN</button>
-        <button type="button" data-lang="th" aria-pressed="false" lang="th">ไทย</button>
+    <div class="top-in">
+      <a class="brand" href="/" aria-label="Home">
+        <svg viewBox="0 0 45 45" aria-hidden="true"><circle cx="22.5" cy="22.5" r="21" fill="var(--marigold)"/></svg>
+        <span data-brand>Tee Shop</span>
+      </a>
+      <nav class="top-nav" aria-label="Main">
+        <a href="#shop" data-nav-all data-i18n="navShop">Shop all</a>
+        <div class="places-nav">
+          <button type="button" aria-expanded="false" aria-controls="places-menu" id="places-btn" data-i18n="navPlaces">Shop by place</button>
+          <ul id="places-menu" hidden></ul>
+        </div>
+        <a href="#sizes" data-i18n="navSizes">Sizes</a>
+        <a href="#story" data-i18n="navStory">Our story</a>
+        <a href="#faq" data-i18n="navHelp">Help</a>
+      </nav>
+      <div class="top-actions">
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="th" aria-pressed="false" lang="th">ไทย</button>
+        </div>
+        <button type="button" class="bag-btn" id="open-bag" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2Z M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span class="sr" data-i18n="bag">Bag</span><span class="count" id="bag-count">0</span>
+        </button>
       </div>
-      <button type="button" class="bag-btn" id="open-bag" aria-haspopup="dialog">
-        <span data-i18n="bag">Bag</span> <span class="count" id="bag-count">0</span>
-      </button>
     </div>
   </header>
 
   <main>
     <section class="hero">
-      <div class="hero-copy">
-        <h1 data-i18n="headline">Small prints, close to the heart.</h1>
-        <p class="lede" data-i18n="lede">Small prints for the left side of your chest, on soft 100% cotton. Each tee is printed when you order it and sent anywhere in Thailand.</p>
-        <p class="hero-actions">
-          <a class="btn" href="#shop" data-i18n="heroCta">See the tees</a>
-          <span class="price-from" id="price-from"></span>
-        </p>
+      <img class="hero-art" src="/img/hero.svg" alt="" width="1400" height="700">
+      <div class="hero-in">
+        <div class="hero-copy">
+          <h1 data-i18n="headline">Drawn from real places in Thailand.</h1>
+          <p class="lede" data-i18n="lede">Mountains in the north, limestone in the south, Bangkok in between. Line-art tees on soft 100% cotton, printed when you order.</p>
+          <p class="hero-actions">
+            <a class="btn btn-light" href="#shop" data-i18n="heroShop">Shop the tees</a>
+            <a class="btn btn-ghost" href="#places" data-i18n="heroPlaces">Shop by place</a>
+          </p>
+        </div>
+        <button type="button" class="hero-tee" id="hero-tee" data-open="doi-inthanon" data-colour="black"></button>
       </div>
-      <figure class="hero-shirt" id="hero-shirt" aria-describedby="hero-cap"></figure>
-      <p class="hero-cap" id="hero-cap" data-i18n="heroCap">Mango sticky rice on a black tee. The print is 6 cm wide.</p>
     </section>
 
-    <ul class="facts" aria-label="Why order here">
-      <li data-i18n="fact1">Printed to order in Thailand</li>
-      <li id="fact-delivery"></li>
-      <li data-i18n="fact3">Pay with any Thai banking app by PromptPay</li>
+    <ul class="facts">
+      <li><strong data-i18n="f1h">Printed to order</strong><span data-i18n="f1p">in Thailand, no warehouse of unsold stock</span></li>
+      <li><strong id="f2h"></strong><span data-i18n="f2p">anywhere in Thailand, with tracking</span></li>
+      <li><strong data-i18n="f3h">Pay by PromptPay</strong><span data-i18n="f3p">from any Thai banking app</span></li>
+      <li><strong data-i18n="f4h">Sizes S to 3XL</strong><span data-i18n="f4p">with a height and weight guide</span></li>
     </ul>
 
+    <section class="places" id="places" aria-labelledby="places-h">
+      <div class="head">
+        <h2 id="places-h" data-i18n="placesH">Shop by place</h2>
+        <p data-i18n="placesP">Every design starts with somewhere real. Pick a corner of the country.</p>
+      </div>
+      <ul class="place-grid" id="place-grid"></ul>
+    </section>
+
     <section class="shop" id="shop" aria-labelledby="shop-h">
-      <div class="section-head">
+      <div class="head">
         <h2 id="shop-h" data-i18n="shopH">The tees</h2>
-        <p data-i18n="shopP">Pick a print, then the shirt colour and size. Every design comes on black or white.</p>
+        <div class="chips" id="chips" role="group" aria-label="Filter by place"></div>
       </div>
       <ul class="grid" id="grid"></ul>
     </section>
 
-    <section class="sizes" id="sizes" aria-labelledby="sizes-h">
-      <div class="section-head">
-        <h2 id="sizes-h" data-i18n="sizesH">Find your size</h2>
-        <p data-i18n="sizesP">Lay a tee that fits you well flat on a table. Measure across the chest, armpit to armpit, and from the top of the shoulder to the hem. Pick the size closest to your numbers.</p>
+    <section class="press" id="press" aria-labelledby="press-h"></section>
+
+    <section class="stories" id="story" aria-labelledby="stories-h">
+      <div class="head">
+        <h2 id="stories-h" data-i18n="storiesH">Every tee has a place behind it</h2>
       </div>
-      <div class="sizes-body">
-        <figure class="flat-tee" aria-hidden="true">
-          <svg viewBox="0 0 360 380">
-            <path d="M120 20C135 40 225 40 240 20L330 60L300 130L265 115V360H95V115L60 130L30 60Z" fill="#fff" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/>
-            <path d="M120 20C135 40 225 40 240 20" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
-            <g stroke="var(--marigold-deep)" stroke-width="3" fill="none" stroke-linecap="round">
-              <path d="M98 140H262M98 130V150M262 130V150"/>
-              <path d="M300 22V360M290 22H310M290 360H310"/>
-            </g>
-            <g fill="var(--ink)" font-size="17" font-weight="600" font-family="Bai Jamjuree, sans-serif">
-              <text x="180" y="170" text-anchor="middle" data-i18n="chest">Chest</text>
-              <text x="314" y="200" data-i18n="length" transform="rotate(90 314 200)">Length</text>
-            </g>
-          </svg>
-        </figure>
-        <div class="size-table-wrap">
-          <table class="size-table" id="size-table">
-            <caption class="sr" data-i18n="sizeCaption">Shirt measurements in centimetres, measured flat</caption>
-          </table>
-          <p class="note" data-i18n="sizeNote">These are typical numbers for a 100% cotton tee. We'll replace them with exact measurements once our print partner's blanks are confirmed.</p>
-        </div>
+      <div class="story-list" id="story-list"></div>
+    </section>
+
+    <section class="pillars" aria-labelledby="pillars-h">
+      <h2 id="pillars-h" class="sr" data-i18n="pillarsH">How we make them</h2>
+      <ul>
+        <li>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 50L22 30L30 38L42 20L56 50Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="46" cy="14" r="5" fill="var(--marigold)"/></svg>
+          <h3 data-i18n="p1h">Drawn from real places</h3><p data-i18n="p1p">Each design is a spot you can visit: a summit, a beach, a park bench in Bangkok. No generic sunsets.</p>
+        </li>
+        <li>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M20 10L8 18L14 30L20 26V54H44V26L50 30L56 18L44 10C40 16 24 16 20 10Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
+          <h3 data-i18n="p2h">Printed when you order</h3><p data-i18n="p2p">Nothing sits in a warehouse. Your tee is printed for you, which is why it takes a little longer.</p>
+        </li>
+        <li>
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 56C20 44 12 34 12 24A20 20 0 0 1 52 24C52 34 44 44 32 56Z" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="32" cy="24" r="7" fill="var(--marigold)"/></svg>
+          <h3 data-i18n="p3h">Made in Thailand</h3><p data-i18n="p3p">Designed in Bangkok and printed by a Thai print partner on 100% cotton.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="sizes" id="sizes" aria-labelledby="sizes-h">
+      <div class="head">
+        <h2 id="sizes-h" data-i18n="sizesH">Find your size</h2>
+        <p data-i18n="sizesP">Start with your height and weight. If you are between sizes, or like a looser fit, go one up.</p>
+      </div>
+      <figure class="people" id="people" aria-hidden="true"></figure>
+      <div class="size-table-wrap">
+        <table class="size-table" id="size-table"></table>
+      </div>
+      <div class="size-notes">
+        <p data-i18n="sizeHow">Measuring a tee you already own works best: lay it flat, measure across the chest from armpit to armpit, and from the top of the shoulder to the hem.</p>
+        <p class="note" data-i18n="sizeNote">Height and weight ranges are a guide for a regular fit. Shirt measurements are typical for a 100% cotton tee and will be updated with our print partner's exact blanks.</p>
       </div>
     </section>
 
     <section class="how" aria-labelledby="how-h">
-      <div class="section-head">
-        <h2 id="how-h" data-i18n="howH">How ordering works</h2>
-      </div>
+      <div class="head"><h2 id="how-h" data-i18n="howH">How ordering works</h2></div>
       <ol class="steps">
-        <li><h3 data-i18n="s1h">Order</h3><p data-i18n="s1p">Add tees to your bag and fill in where to send them. You get an order number straight away.</p></li>
+        <li><h3 data-i18n="s1h">Order</h3><p data-i18n="s1p">Add tees to your bag and tell us where to send them. You get an order number straight away.</p></li>
         <li><h3 data-i18n="s2h">Pay by PromptPay</h3><p data-i18n="s2p">Scan the QR code on screen, or the one in your email, with any Thai banking app. The amount is already filled in.</p></li>
         <li><h3 data-i18n="s3h">We print it</h3><p data-i18n="s3p">Once the payment shows up, your tee goes to print. Printing takes 7 to 10 working days.</p></li>
         <li><h3 data-i18n="s4h">It arrives</h3><p data-i18n="s4p">We post it with tracking, and it takes another 3 to 5 working days to reach you. Allow about 3 weeks from order to door.</p></li>
@@ -105,44 +138,83 @@
     </section>
 
     <section class="faq" id="faq" aria-labelledby="faq-h">
-      <div class="section-head">
-        <h2 id="faq-h" data-i18n="faqH">Questions</h2>
-      </div>
+      <div class="head"><h2 id="faq-h" data-i18n="faqH">Questions</h2></div>
       <div class="faq-list">
-        <details><summary data-i18n="q1">Why only small prints?</summary><p data-i18n="a1">A small print looks good with everything and doesn't crack across your chest after a few washes. We think it's the better tee.</p></details>
-        <details><summary data-i18n="q2">How big is the print?</summary><p data-i18n="a2">Each design lists its width. Most are 4.5 cm or 6 cm wide. Open a design to see it against a ruler.</p></details>
+        <details><summary data-i18n="q1">What are the tees made of?</summary><p data-i18n="a1">100% cotton, regular fit, crew neck. The designs are printed straight onto the fabric, so they stay soft.</p></details>
+        <details><summary data-i18n="q2">How big is the print?</summary><p data-i18n="a2">Front prints are 25 to 28 cm wide, across the chest. Small chest prints are about 9 cm. Each tee lists its exact size and shows it against a ruler.</p></details>
         <details><summary data-i18n="q3">What if it doesn't fit?</summary><p data-i18n="a3">Each tee is printed for you, so we can't take back the wrong size. If it arrives damaged or misprinted, email us a photo within 7 days and we'll send a new one.</p></details>
         <details><summary data-i18n="q4">How do I wash it?</summary><p data-i18n="a4">Inside out, cool water, no tumble dryer. Don't iron over the print.</p></details>
         <details><summary data-i18n="q5">Can I pay another way?</summary><p data-i18n="a5">Not yet. PromptPay works with every Thai bank app, and card payments are coming later.</p></details>
       </div>
     </section>
+
+    <section class="signup" aria-labelledby="signup-h">
+      <div class="signup-in">
+        <h2 id="signup-h" data-i18n="signupH">New places, first</h2>
+        <p data-i18n="signupP">One short email when a new design is out. Nothing else.</p>
+        <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="company" id="signup">
+          <input type="hidden" name="form-name" value="newsletter">
+          <p class="hp"><label>Company <input name="company" tabindex="-1" autocomplete="off"></label></p>
+          <label class="sr" for="signup-email" data-i18n="fEmail">Email</label>
+          <input id="signup-email" name="email" type="email" required autocomplete="email" data-i18n-ph="emailPh" placeholder="Your email">
+          <button class="btn" type="submit" data-i18n="signupBtn">Sign up</button>
+          <p class="signup-msg" id="signup-msg" role="status"></p>
+        </form>
+      </div>
+    </section>
   </main>
 
   <footer class="foot">
-    <p class="foot-brand"><span data-brand>Tee Shop</span>. <span data-i18n="footLine">Small prints, printed in Thailand.</span></p>
-    <p><span data-i18n="contact">Questions about an order?</span> <a id="contact-link" href="#"></a></p>
+    <div class="foot-in">
+      <div>
+        <p class="foot-brand"><span data-brand>Tee Shop</span></p>
+        <p data-i18n="footLine">Line-art tees drawn from real places in Thailand.</p>
+      </div>
+      <div>
+        <h3 data-i18n="footShop">Shop</h3>
+        <ul id="foot-places"></ul>
+      </div>
+      <div>
+        <h3 data-i18n="footHelp">Help</h3>
+        <ul>
+          <li><a href="#sizes" data-i18n="navSizes">Sizes</a></li>
+          <li><a href="#faq" data-i18n="footFaq">Questions and returns</a></li>
+          <li><a id="contact-link" href="#"></a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-i18n="footPay">We accept</h3>
+        <p class="pp">PromptPay</p>
+      </div>
+    </div>
   </footer>
 
-  <!-- Product sheet -->
+  <!-- Product page -->
   <dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
     <form method="dialog" class="sheet-close"><button aria-label="Close" data-i18n-aria="close">✕</button></form>
     <div class="sheet-body">
-      <div class="sheet-visual" id="sheet-visual"></div>
+      <div class="gallery">
+        <div class="gallery-main" id="gallery-main"></div>
+        <div class="thumbs" id="thumbs"></div>
+      </div>
       <div class="sheet-info">
+        <p class="sheet-place" id="sheet-place"></p>
         <h2 id="sheet-title"></h2>
         <p class="sheet-price" id="sheet-price"></p>
         <p class="sheet-blurb" id="sheet-blurb"></p>
         <fieldset class="opts">
-          <legend data-i18n="colour">Shirt colour</legend>
+          <legend><span data-i18n="colour">Colour</span>: <span id="colour-name"></span></legend>
           <div class="swatches" id="sheet-colours"></div>
         </fieldset>
         <fieldset class="opts">
           <legend data-i18n="size">Size</legend>
           <div class="sizes-pick" id="sheet-sizes"></div>
+          <p class="size-hint" id="size-hint"></p>
           <a class="small-link" href="#sizes" id="size-guide-link" data-i18n="sizeGuide">Size guide</a>
         </fieldset>
         <button type="button" class="btn btn-wide" id="add-to-bag" data-i18n="add">Add to bag</button>
         <p class="sheet-msg" id="sheet-msg" role="status"></p>
+        <ul class="details" id="details"></ul>
         <figure class="scale">
           <figcaption id="scale-cap"></figcaption>
           <div id="scale-svg"></div>

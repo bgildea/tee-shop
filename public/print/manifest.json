@@ -1,32 +1,123 @@
 {
-  "bangkok-coordinates": {
+  "doi-inthanon": {
     "black": {
-      "widthCm": 6,
-      "widthPx300": 709
+      "widthCm": 25,
+      "widthPx300": 2953,
+      "placement": "front"
+    },
+    "forest": {
+      "widthCm": 25,
+      "widthPx300": 2953,
+      "placement": "front"
     },
     "white": {
-      "widthCm": 6,
-      "widthPx300": 709
+      "widthCm": 25,
+      "widthPx300": 2953,
+      "placement": "front"
     }
   },
-  "mango-sticky-rice": {
+  "railay": {
     "black": {
-      "widthCm": 6,
-      "widthPx300": 709
+      "widthCm": 25,
+      "widthPx300": 2953,
+      "placement": "front"
     },
     "white": {
-      "widthCm": 6,
-      "widthPx300": 709
+      "widthCm": 25,
+      "widthPx300": 2953,
+      "placement": "front"
+    },
+    "sand": {
+      "widthCm": 25,
+      "widthPx300": 2953,
+      "placement": "front"
     }
   },
-  "fon": {
+  "khao-yai-hornbill": {
     "black": {
-      "widthCm": 4.5,
-      "widthPx300": 532
+      "widthCm": 25,
+      "widthPx300": 2953,
+      "placement": "front"
+    },
+    "forest": {
+      "widthCm": 25,
+      "widthPx300": 2953,
+      "placement": "front"
+    }
+  },
+  "similan-turtle": {
+    "white": {
+      "widthCm": 25,
+      "widthPx300": 2953,
+      "placement": "front"
+    },
+    "black": {
+      "widthCm": 25,
+      "widthPx300": 2953,
+      "placement": "front"
+    },
+    "sand": {
+      "widthCm": 25,
+      "widthPx300": 2953,
+      "placement": "front"
+    }
+  },
+  "lumpini-lizard": {
+    "white": {
+      "widthCm": 27,
+      "widthPx300": 3189,
+      "placement": "front"
+    },
+    "black": {
+      "widthCm": 27,
+      "widthPx300": 3189,
+      "placement": "front"
+    },
+    "sand": {
+      "widthCm": 27,
+      "widthPx300": 3189,
+      "placement": "front"
+    }
+  },
+  "bangkok-skyline": {
+    "black": {
+      "widthCm": 28,
+      "widthPx300": 3308,
+      "placement": "front"
     },
     "white": {
-      "widthCm": 4.5,
-      "widthPx300": 532
+      "widthCm": 28,
+      "widthPx300": 3308,
+      "placement": "front"
+    }
+  },
+  "longtail": {
+    "white": {
+      "widthCm": 27,
+      "widthPx300": 3189,
+      "placement": "front"
+    },
+    "black": {
+      "widthCm": 27,
+      "widthPx300": 3189,
+      "placement": "front"
+    },
+    "sand": {
+      "widthCm": 27,
+      "widthPx300": 3189,
+      "placement": "front"
+    }
+  },
+  "soi-dog": {
+    "white": {
+      "widthCm": 9,
+      "widthPx300": 1063,
+      "placement": "chest"
+    },
+    "black": {
+      "widthCm": 9,
+      "widthPx300": 1063,
+      "placement": "chest"
     }
   }
 }
